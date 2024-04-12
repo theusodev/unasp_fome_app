@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:unasp_fome_app/app.dart';
+import 'package:unasp_fome_app/common/constants/app_colors.dart';
 
 void main() {
   runApp(const HomePage());
@@ -12,30 +14,39 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        selectedFontSize: 0,
         type: BottomNavigationBarType.fixed,
         currentIndex: 0,
-        unselectedLabelStyle: const TextStyle(color: Colors.white, fontSize: 14),
-        backgroundColor: Color.fromARGB(255, 255, 216, 166),
-        fixedColor: const Color.fromARGB(255, 0, 0, 0),
-        unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
-        items: const [
+        unselectedLabelStyle: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
+        backgroundColor: AppColors.navigationbar_background,
+        fixedColor: Color.fromARGB(255, 0, 0, 0),
+        unselectedItemColor: Color(0xFF000000),
+        items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Image.asset('assets/images/home_icon_Outlined.png',
+              width: 24,
+              height: 24),
               label: 'Home',
           ),
 
           BottomNavigationBarItem(
-              icon: Icon(Icons.access_time),
+              icon: Image.asset('assets/images/search_icon_Outlined.png',
+              width: 24,
+              height: 24),
               label: 'Procurar',
           ),
 
           BottomNavigationBarItem(
-              icon: Icon(Icons.flip),
+              icon: Image.asset('assets/images/kart_icon_Outlined.png',
+              width: 24,
+              height: 24),
               label: 'Carrinho',
           ),
 
           BottomNavigationBarItem(
-              icon: Icon(Icons.school),
+              icon: Image.asset('assets/images/profile_icon_Outlined.png', 
+              width:24, 
+              height:24),
               label: 'Perfil',
           ),
         ],

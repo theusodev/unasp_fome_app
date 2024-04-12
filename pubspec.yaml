@@ -65,6 +65,10 @@ flutter:
     - assets\images\Icone Unasp Fome.png
     - assets\images\Logo_Login.png
     - assets\images\Google_Login.png
+    - assets\images\home_icon_Outlined.png
+    - assets\images\kart_icon_Outlined.png
+    - assets\images\profile_icon_Outlined.png
+    - assets\images\search_icon_Outlined.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
