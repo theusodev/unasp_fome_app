@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -60,6 +58,8 @@ class LoginPage extends StatelessWidget {
                 ),
                 
                 //BOTÃO ENTRAR
+                
+                
                 MaterialButton( 
                   height: 41.0, 
                   minWidth: 171.0,
@@ -69,7 +69,9 @@ class LoginPage extends StatelessWidget {
                   //color: Theme.of(context).primaryColor, 
                   textColor: Colors.white, 
                   child: new Text("Entrar"), 
-                  onPressed: () => {}, 
+                  onPressed: () => {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()))
+                  }, 
                   //splashColor: Colors.redAccent,
                 )
               ],
