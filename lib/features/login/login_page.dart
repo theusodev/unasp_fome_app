@@ -7,7 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'dart:ui' as ui;
 
 import 'package:flutter/widgets.dart';
-import 'package:unasp_fome_app/features/home.dart';
+import 'package:unasp_fome_app/features/homepage/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -89,7 +89,7 @@ class LoginPage extends StatelessWidget {
                   onPressed: () => {}, 
                   //splashColor: Colors.redAccent,
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 10),
 
                 //botão google
                 MaterialButton(

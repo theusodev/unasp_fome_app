@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unasp_fome_app/common/constants/app_colors.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -7,7 +8,7 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: AppColors.whitebackground,
       ),
       child: Image.asset('assets/images/Icone Unasp Fome.png', 
       width: 360, 
