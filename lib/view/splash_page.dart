@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unasp_fome_app/common/constants/app_colors.dart';
 
-import '../login/login_page.dart';
+import 'login_page.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});

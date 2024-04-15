@@ -2,11 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'dart:ui' as ui;
-
 import 'package:flutter/widgets.dart';
-import 'package:unasp_fome_app/features/homepage/home_page.dart';
-import 'package:unasp_fome_app/features/navigationpagebar/navigationpagebar_page.dart';
+import 'package:unasp_fome_app/view/navigationpagebar_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -14,8 +11,9 @@ class LoginPage extends StatelessWidget {
  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
+      
+      body: SingleChildScrollView(padding: 
+        EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -119,7 +117,7 @@ class LoginPage extends StatelessWidget {
                 ),
           ],
         ),
-      ),
+      )
     );
   }
 }

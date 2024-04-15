@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:unasp_fome_app/app.dart';
 
 class Navigationpagebar extends StatelessWidget {
   const Navigationpagebar({super.key});
@@ -14,7 +13,7 @@ class Navigationpagebar extends StatelessWidget {
         unselectedLabelStyle: const TextStyle(color: Colors.white, fontSize: 14),
         backgroundColor: Color.fromARGB(255, 206, 206, 206),
         onTap: (value) {
-          
+          //função aqui
         },
         items: [
           BottomNavigationBarItem(
@@ -22,6 +21,7 @@ class Navigationpagebar extends StatelessWidget {
               width: 24,
               height: 24),
               label: 'Home',
+              //activeIcon: Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()))
           ),
 
           BottomNavigationBarItem(
