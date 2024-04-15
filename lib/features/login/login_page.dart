@@ -6,6 +6,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/widgets.dart';
 import 'package:unasp_fome_app/features/homepage/home_page.dart';
+import 'package:unasp_fome_app/features/navigationpagebar/navigationpagebar_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -70,7 +71,7 @@ class LoginPage extends StatelessWidget {
                   textColor: Colors.white, 
                   child: new Text("Entrar"), 
                   onPressed: () => {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()))
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Navigationpagebar())) //depois mudar pra home
                   }, 
                   //splashColor: Colors.redAccent,
                 )
