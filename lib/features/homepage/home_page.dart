@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:unasp_fome_app/app.dart';
-import 'package:unasp_fome_app/common/constants/app_colors.dart';
 
 void main() {
   runApp(const HomePage());
@@ -17,10 +15,11 @@ class HomePage extends StatelessWidget {
         selectedFontSize: 0,
         type: BottomNavigationBarType.fixed,
         currentIndex: 0,
-        unselectedLabelStyle: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
-        backgroundColor: AppColors.navigationbar_background,
-        fixedColor: Color.fromARGB(255, 0, 0, 0),
-        unselectedItemColor: Color(0xFF000000),
+        unselectedLabelStyle: const TextStyle(color: Colors.white, fontSize: 14),
+        backgroundColor: Color.fromARGB(255, 206, 206, 206),
+        onTap: (value) {
+          
+        },
         items: [
           BottomNavigationBarItem(
               icon: Image.asset('assets/images/home_icon_Outlined.png',
@@ -51,6 +50,12 @@ class HomePage extends StatelessWidget {
           ),
         ],
         
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          
+        ],
       ),
     ); 
   }
