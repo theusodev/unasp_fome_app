@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unasp_fome_app/common/constants/app_colors.dart';
 
 class Navigationpagebar extends StatelessWidget {
   const Navigationpagebar({super.key});
@@ -7,14 +8,9 @@ class Navigationpagebar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        selectedFontSize: 0,
         type: BottomNavigationBarType.fixed,
-        currentIndex: 0,
-        unselectedLabelStyle: const TextStyle(color: Colors.white, fontSize: 14),
-        backgroundColor: Color.fromARGB(255, 206, 206, 206),
-        onTap: (value) {
-          //função aqui
-        },
+        //currentIndex: 0,
+        backgroundColor: AppColors.navigationbar_background,
         items: [
           BottomNavigationBarItem(
               icon: Image.asset('assets/images/home_icon_Outlined.png',
@@ -45,14 +41,8 @@ class Navigationpagebar extends StatelessWidget {
               label: 'Perfil',
           ),
         ],
-        
+      
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          
-        ],
-      ),
-    ); 
+    );
   }
 }
