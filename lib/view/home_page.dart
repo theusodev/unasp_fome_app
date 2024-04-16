@@ -2,6 +2,9 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:unasp_fome_app/view/NewPageScreen.dart';
+import 'package:unasp_fome_app/view/cart_page.dart';
+import 'package:unasp_fome_app/view/profile_page.dart';
+import 'package:unasp_fome_app/view/search_page.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -13,10 +16,10 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   int _indiceAtual = 0;
   final List<Widget> _telas = [
-    NewPageScreen("Home"),
-    NewPageScreen("Procurar"),
-    NewPageScreen("Carrinho"),
-    NewPageScreen("Perfil")
+    Homepage(),
+    Searchpage(),
+    Cartpage(),
+    Profilepage()
   ];
 
   void onTabTapped(int index) {

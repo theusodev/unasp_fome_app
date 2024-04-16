@@ -4,7 +4,6 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:unasp_fome_app/view/home_page.dart';
-import 'package:unasp_fome_app/view/navigationpagebar_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
