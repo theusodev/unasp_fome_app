@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:unasp_fome_app/view/home_page.dart';
 import 'package:unasp_fome_app/view/navigationpagebar_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -69,7 +70,7 @@ class LoginPage extends StatelessWidget {
                   textColor: Colors.white, 
                   child: new Text("Entrar"), 
                   onPressed: () => {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Navigationpagebar())) //depois mudar pra home
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage())) //depois mudar pra home
                   }, 
                   //splashColor: Colors.redAccent,
                 )

@@ -9,7 +9,7 @@ class Navigationpagebar extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        //currentIndex: 0,
+        currentIndex: 0,
         backgroundColor: AppColors.navigationbar_background,
         items: [
           BottomNavigationBarItem(
@@ -41,7 +41,6 @@ class Navigationpagebar extends StatelessWidget {
               label: 'Perfil',
           ),
         ],
-      
       ),
     );
   }
