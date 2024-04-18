@@ -16,10 +16,11 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   int _indiceAtual = 0;
   final List<Widget> _telas = [
-    Homepage(),
-    Searchpage(),
-    Cartpage(),
-    Profilepage()
+    NewPageScreen("Home"),
+    NewPageScreen("Procurar"),
+    NewPageScreen("Carrinho"),
+    NewPageScreen("Perfil")
+
   ];
 
   void onTabTapped(int index) {

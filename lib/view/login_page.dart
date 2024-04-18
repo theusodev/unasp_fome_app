@@ -69,7 +69,7 @@ class LoginPage extends StatelessWidget {
                   textColor: Colors.white, 
                   child: new Text("Entrar"), 
                   onPressed: () => {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage())) //depois mudar pra home
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage())) //o problema tá por aqui
                   }, 
                   //splashColor: Colors.redAccent,
                 )
