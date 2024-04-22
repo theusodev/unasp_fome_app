@@ -62,8 +62,10 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                
-                //BOTÃO ENTRAR                
+              ],
+            ),
+            
+                //BOTÃO ENTRAR
                 MaterialButton( 
                   height: 41.0, 
                   minWidth: 171.0,
@@ -77,11 +79,10 @@ class LoginPage extends StatelessWidget {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage())) //o problema tá por aqui
                   }, 
                   //splashColor: Colors.redAccent,
-                )
-              ],
-            ),
-            SizedBox(height: 0.0),
-            
+                ),
+                SizedBox(height: 2),
+                
+                
                 //NOVO BOTÃO CADASTRAR-SE
                 MaterialButton( 
                   height: 41.0, 

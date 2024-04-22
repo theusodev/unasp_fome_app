@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:unasp_fome_app/view/esqueciminhasenha_page.dart';
 import 'package:unasp_fome_app/view/home_page.dart';
 import 'package:unasp_fome_app/view/login_page.dart';
+import 'package:unasp_fome_app/view/login_page1.dart';
 import 'package:unasp_fome_app/view/navigationpagebar_page.dart';
 import 'package:unasp_fome_app/view/register_page.dart';
 import 'package:unasp_fome_app/view/splash_page.dart';
