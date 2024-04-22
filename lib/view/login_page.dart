@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:unasp_fome_app/view/esqueciminhasenha_page.dart';
 import 'package:unasp_fome_app/view/home_page.dart';
+import 'package:unasp_fome_app/view/register_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -25,6 +27,8 @@ class LoginPage extends StatelessWidget {
                 height: 250, // Altura da imagem
               ),
             ),
+            
+            //CAMPO EMAIL
             SizedBox(height: 16.0),
             TextField(
               decoration: InputDecoration(labelText: 'E-mail',
@@ -32,6 +36,9 @@ class LoginPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100.0))),
             ),
             SizedBox(height: 16.0),
+            
+
+            //CAMPO SENHA
             TextField(
               decoration: InputDecoration(labelText: 'Senha',
               border: OutlineInputBorder(
@@ -43,8 +50,8 @@ class LoginPage extends StatelessWidget {
             Column(
               children: [
                 TextButton(
-                  onPressed: () {
-                    // Adicione aqui a lógica para esquecer a senha
+                  onPressed: () => {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp())) //rota para "esqeuci minha senha"
                   },
                   child: Text(
                     'Esqueci minha Senha',
@@ -56,9 +63,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 
-                //BOTÃO ENTRAR
-                
-                
+                //BOTÃO ENTRAR                
                 MaterialButton( 
                   height: 41.0, 
                   minWidth: 171.0,
@@ -87,7 +92,9 @@ class LoginPage extends StatelessWidget {
                   //color: Theme.of(context).primaryColor, 
                   textColor: Colors.white, 
                   child: new Text("Cadastrar-se"), 
-                  onPressed: () => {}, 
+                  onPressed: () => {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Registerpage()))
+                  }, 
                   //splashColor: Colors.redAccent,
                 ),
                 SizedBox(height: 10),
