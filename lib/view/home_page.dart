@@ -20,7 +20,6 @@ class _HomepageState extends State<Homepage> {
     NewPageScreen("Procurar"),
     NewPageScreen("Carrinho"),
     NewPageScreen("Perfil")
-
   ];
 
   void onTabTapped(int index) {
@@ -29,7 +28,7 @@ class _HomepageState extends State<Homepage> {
     });
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _telas[_indiceAtual],
@@ -40,31 +39,27 @@ class _HomepageState extends State<Homepage> {
         backgroundColor: Color(0xFFCECECE),
         items: [
           BottomNavigationBarItem(
-              icon: Image.asset('assets/images/home_icon_Outlined.png',
+            icon: Image.asset(
+              'assets/images/home_icon_Outlined.png',
               width: 24,
-              height: 24,),
-              label: "Home",
+              height: 24,
+            ),
+            label: "Home",
           ),
-
           BottomNavigationBarItem(
-              icon: Image.asset('assets/images/search_icon_Outlined.png',
-              width: 24,
-              height: 24),
-              label: "Procurar",
+            icon: Image.asset('assets/images/search_icon_Outlined.png',
+                width: 24, height: 24),
+            label: "Procurar",
           ),
-
           BottomNavigationBarItem(
-              icon: Image.asset('assets/images/kart_icon_Outlined.png',
-              width: 24,
-              height: 24),
-              label: "Carrinho",
+            icon: Image.asset('assets/images/kart_icon_Outlined.png',
+                width: 24, height: 24),
+            label: "Carrinho",
           ),
-
           BottomNavigationBarItem(
-              icon: Image.asset('assets/images/profile_icon_Outlined.png', 
-              width:24, 
-              height:24),
-              label: "Perfil",
+            icon: Image.asset('assets/images/profile_icon_Outlined.png',
+                width: 24, height: 24),
+            label: "Perfil",
           ),
         ],
       ),
