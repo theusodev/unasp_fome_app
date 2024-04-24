@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unasp_fome_app/common/constants/app_colors.dart';
-import 'package:unasp_fome_app/view/login_page1.dart';
+import 'package:unasp_fome_app/view/login_page.dart';
 
 import 'login_page.dart';
 
@@ -13,7 +13,7 @@ class SplashPage extends StatelessWidget {
       // Após o tempo definido, navegue para a HomePage
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => newLoginPage()),
+        MaterialPageRoute(builder: (context) => LoginPage()),
       );
     });
 
