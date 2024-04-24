@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unasp_fome_app/common/constants/app_colors.dart';
 import 'package:unasp_fome_app/view/login_page.dart';
-
 import 'login_page.dart';
 
 class SplashPage extends StatelessWidget {
