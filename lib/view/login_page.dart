@@ -112,14 +112,37 @@ class _LoginPageState extends State<LoginPage> {
                                       Padding(
                                         padding: const EdgeInsets.all(8),
                                         child: ElevatedButton(
-                                          child: const Text('Enviar'),
-                                          onPressed: () {
-                                            if (_formKey.currentState!
-                                                .validate()) {
-                                              _formKey.currentState!.save();
-                                            }
-                                          },
-                                        ),
+                                            child: const Text('Enviar'),
+                                            onPressed: () {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: Text('Sucesso'),
+                                                    content: Text(
+                                                        'E-mail enviado com sucesso!'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          // Close the dialog
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                          // Navigate back to the home screen
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          LoginPage()));
+                                                        },
+                                                        child: Text('OK'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            }),
                                       )
                                     ],
                                   ),
@@ -153,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            Homepage())) //o problema tá por aqui
+                            Homepage()))
               },
               //splashColor: Colors.redAccent,
             ),
