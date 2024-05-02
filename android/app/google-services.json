@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "695561249892",
+    "project_id": "flutter-unaspfome-app",
+    "storage_bucket": "flutter-unaspfome-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695561249892:android:5d21ec8331e835a2f52b71",
+        "android_client_info": {
+          "package_name": "com.example.unasp_fome_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKL3aMJ68pkfP1dRk9yK-Cb4zpFzfagEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
