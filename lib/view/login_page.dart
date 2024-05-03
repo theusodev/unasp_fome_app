@@ -2,6 +2,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:unasp_fome_app/view/home_page.dart';
 import 'package:unasp_fome_app/view/register_page.dart';
 
@@ -14,6 +16,14 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
+
+  var validacaosenha = MultiValidator([
+    RequiredValidator(errorText: 'Insira seu E-mail'),
+    EmailValidator(errorText: 'Insira um E-mail válido')
+  ]);
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +49,21 @@ class _LoginPageState extends State<LoginPage> {
             ),
 
             //campo do email
-            TextField(
+            TextFormField(
+              controller: _emailController,
+              validator: (String? value) {
+                if (value == null) {
+                  return "Insira um e-mail válido";
+                }
+                if (value != validacaosenha) {
+                  print(validacaosenha);
+                }
+                ;
+                return null;
+              },
               decoration: InputDecoration(
                   labelText: 'E-mail',
+                  errorStyle: TextStyle(fontSize: 18.0),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100.0))),
             ),
@@ -49,6 +71,7 @@ class _LoginPageState extends State<LoginPage> {
 
             //CAMPO SENHA
             TextField(
+              controller: _senhaController,
               decoration: InputDecoration(
                   labelText: 'Senha',
                   border: OutlineInputBorder(
@@ -57,110 +80,19 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 16.0),
 
-            //esqueci minha fucking senha
-            Align(
-              //alignment: Alignment.topCenter,
-              child: MaterialButton(
-                onPressed: () async {
-                  await showDialog<void>(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            content: Stack(
-                              clipBehavior: Clip.none,
-                              children: <Widget>[
-                                Positioned(
-                                  right: -40,
-                                  top: -40,
-                                  child: InkResponse(
-                                    onTap: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const CircleAvatar(
-                                      backgroundColor: Colors.red,
-                                      child: Icon(Icons.close),
-                                    ),
-                                  ),
-                                ),
-                                Form(
-                                  key: _formKey,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[
-                                      //TEXTO DE INSTRUÇÃO
-                                      Padding(
-                                        padding: const EdgeInsets.all(8),
-                                        child: Text(
-                                          'Para redefinir sua senha, informe o e-mail cadastrado na sua conta e lhe enviaremos um link com as instruções.',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-
-                                      //CAMPO E-EMAIL
-                                      Padding(
-                                        padding: const EdgeInsets.all(8),
-                                        child: TextFormField(
-                                          decoration: InputDecoration(
-                                              labelText: 'E-mail',
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              100)))),
-                                        ),
-                                      ),
-
-                                      Padding(
-                                        padding: const EdgeInsets.all(8),
-                                        child: ElevatedButton(
-                                            child: const Text('Enviar'),
-                                            onPressed: () {
-                                              showDialog(
-                                                context: context,
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return AlertDialog(
-                                                    title: Text('Sucesso'),
-                                                    content: Text(
-                                                        'E-mail enviado com sucesso!'),
-                                                    actions: <Widget>[
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          // Close the dialog
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                          // Navigate back to the home screen
-                                                          Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) =>
-                                                                          LoginPage()));
-                                                        },
-                                                        child: Text('OK'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                            }),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ));
-                },
-                child: Text(
-                  'Esqueci minha senha',
-                  style: TextStyle(
-                    color: const Color.fromRGBO(20, 72, 132, 1),
-                    decoration: TextDecoration.underline,
-                    fontSize: 16,
-                  ),
+            //BOTÃO ESQUECI MINHA SENHA
+            MaterialButton(onPressed: () => {},
+              child: Text(
+                'Esqueci minha senha',
+                style: TextStyle(
+                  color: const Color.fromRGBO(20, 72, 132, 1),
+                  decoration: TextDecoration.underline,
+                  fontSize: 16,
                 ),
               ),
             ),
+            SizedBox(height: 10.0),
+
             //BOTÃO ENTRAR
             MaterialButton(
               height: 41.0,
@@ -172,11 +104,11 @@ class _LoginPageState extends State<LoginPage> {
               textColor: Colors.white,
               child: new Text("Entrar"),
               onPressed: () => {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Homepage()))
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) =>
+                //             Homepage()))
               },
               //splashColor: Colors.redAccent,
             ),

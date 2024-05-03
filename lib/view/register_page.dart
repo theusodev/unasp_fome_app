@@ -15,7 +15,7 @@ class Registerpage extends StatefulWidget {
 
 class _RegisterpageState extends State<Registerpage> {
   Map userData = {};
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   bool passenable = true;
 
   // Função para validar a senha
