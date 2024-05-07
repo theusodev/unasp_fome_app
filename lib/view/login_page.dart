@@ -51,12 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                       errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.0),
                           borderSide: BorderSide(color: Colors.red,
-                          width: 2)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100.0),
-                          borderSide: BorderSide(color: Colors.red,
-                          width: 10)),
-                      
+                          width: 2)),                      
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.0))),
                   validator: (String? value) {
@@ -78,6 +73,11 @@ class _LoginPageState extends State<LoginPage> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: 'Senha',
+                      errorStyle: TextStyle(fontSize: 18.0),
+                      errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100.0),
+                          borderSide: BorderSide(color: Colors.red,
+                          width: 2)),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.0))),
                   validator: (String? value) {
