@@ -1,9 +1,14 @@
 // ignore_for_file: prefer_const_constructors, camel_case_types, library_private_types_in_public_api, unnecessary_import
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:unasp_fome_app/common/meu_snackbar.dart';
+import 'package:unasp_fome_app/services/autenticacao_service.dart';
 import 'package:unasp_fome_app/view/home_page.dart';
 import 'package:unasp_fome_app/view/register_page.dart';
 
@@ -16,6 +21,36 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _senhaController = TextEditingController();
+
+  AutenticacaoService _autentService = AutenticacaoService();
+
+  // Função para validar a senha
+  String? validatePassword(String value) {
+    // Verifica se a senha tem pelo menos 8 caracteres
+    if (value.length < 8) {
+      return 'A senha deve ter pelo menos 8 caracteres';
+    }
+    // Verifica se a senha contém letras maiúsculas
+    if (!value.contains(RegExp(r'[A-Z]'))) {
+      return 'A senha deve conter pelo menos uma letra maiúscula';
+    }
+    // Verifica se a senha contém letras minúsculas
+    if (!value.contains(RegExp(r'[a-z]'))) {
+      return 'A senha deve conter pelo menos uma letra minúscula';
+    }
+    // Verifica se a senha contém números
+    if (!value.contains(RegExp(r'[0-9]'))) {
+      return 'A senha deve conter pelo menos um número';
+    }
+    // Verifica se a senha contém caracteres especiais
+    if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      return 'A senha deve conter pelo menos um caractere especial';
+    }
+    return null; // Senha válida
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,50 +80,34 @@ class _LoginPageState extends State<LoginPage> {
 
                 //campo do email
                 TextFormField(
+                  controller: _emailController,
                   decoration: InputDecoration(
                       labelText: 'E-mail',
                       errorStyle: TextStyle(fontSize: 18.0),
                       errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.0),
-                          borderSide: BorderSide(color: Colors.red,
-                          width: 2)),                      
+                          borderSide: BorderSide(color: Colors.red, width: 2)),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.0))),
-                  validator: (String? value) {
-                    if (value == null) {
-                      return "Insira um e-mail válido";
-                    }
-                    if (value.length < 5) {
-                      return "O e-mail é muito curto";
-                    }
-                    if (!value.contains("@")) {
-                      return "O e-mail não é valido";
-                    }
-                    return null;
-                  },
+                  validator: MultiValidator([
+                    RequiredValidator(errorText: 'Insira um e-mail'),
+                    EmailValidator(errorText: 'Insira um e-mail válido')
+                  ]),
                 ),
                 SizedBox(height: 16.0),
 
                 //CAMPO SENHA
                 TextFormField(
+                  controller: _senhaController,
                   decoration: InputDecoration(
                       labelText: 'Senha',
                       errorStyle: TextStyle(fontSize: 18.0),
                       errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.0),
-                          borderSide: BorderSide(color: Colors.red,
-                          width: 2)),
+                          borderSide: BorderSide(color: Colors.red, width: 2)),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.0))),
-                  validator: (String? value) {
-                    if (value == null) {
-                      return "Insira uma senha válida";
-                    }
-                    if (value.length < 8) {
-                      return "A senha é muito curta";
-                    }
-                    return null;
-                  },
+                  validator: (value) => validatePassword(value!),
                   obscureText: true,
                 ),
                 SizedBox(height: 16.0),
@@ -96,6 +115,9 @@ class _LoginPageState extends State<LoginPage> {
                 //BOTÃO ESQUECI MINHA SENHA
                 MaterialButton(
                   onPressed: () => {},
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100)
+                  ),
                   child: Text(
                     'Esqueci minha senha',
                     style: TextStyle(
@@ -117,7 +139,9 @@ class _LoginPageState extends State<LoginPage> {
                   //color: Theme.of(context).primaryColor,
                   textColor: Colors.white,
                   child: new Text("Entrar"),
-                  onPressed: () => {botaoEntrarClicado()},
+                  onPressed: () => {
+                    botaoEntrarClicado()
+                    },
                   //splashColor: Colors.redAccent,
                 ),
                 SizedBox(height: 2),
@@ -143,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                 //botão google
                 MaterialButton(
                   onPressed: () {
-                    //lógica do botão aqui
+                    SignInWithGoogle();
                   },
                   height: 41.0,
                   minWidth: 171.0,
@@ -173,10 +197,35 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   botaoEntrarClicado() {
+
+    String email = _emailController.text;
+    String senha = _senhaController.text;
+
     if (_formKey.currentState!.validate()) {
       print("Form válido");
+      _autentService.logarUsuarios(email: email, senha: senha).then((String? erro){
+        if (erro != null){
+          mostrarSnackBar(context: context, texto: erro);
+        }
+      });
     } else {
       print("Form inválido");
     }
+  }
+
+   SignInWithGoogle() async {
+
+    GoogleSignInAccount? googleUser=await GoogleSignIn(). signIn();
+
+    GoogleSignInAuthentication? googleAuth=await googleUser?.authentication;
+
+    AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken
+    );
+
+    UserCredential userCredential=await FirebaseAuth.instance.signInWithCredential(credential);
+
+    print(userCredential.user?.displayName);
   }
 }

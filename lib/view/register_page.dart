@@ -403,26 +403,31 @@ class _RegisterpageState extends State<Registerpage> {
     String cep = _cepController.text;
 
     if (_formKey.currentState!.validate()) {
-      if (queroCadastrar){
+      if (queroCadastrar) {
         print("Entrada validada");
-        print("${_nomeController.text}, ${_nascimentoController.text}, ${_cpfController.text}, ${_emailController.text}, ${_senhaController.text}, ${_telefoneController.text}, ${_enderecoController.text}, ${_complementoController.text}, ${_cepController.text}");
-        _autentService.cadastrarUsuario(nome: nome, nascimento: nascimento, cpf: cpf, email: email, senha: senha, telefone: telefone, endereco: endereco, complemento: complemento, cep: cep).then(
+        print(
+            "${_nomeController.text}, ${_nascimentoController.text}, ${_cpfController.text}, ${_emailController.text}, ${_senhaController.text}, ${_telefoneController.text}, ${_enderecoController.text}, ${_complementoController.text}, ${_cepController.text}");
+        _autentService
+            .cadastrarUsuario(
+                nome: nome,
+                nascimento: nascimento,
+                cpf: cpf,
+                email: email,
+                senha: senha,
+                telefone: telefone,
+                endereco: endereco,
+                complemento: complemento,
+                cep: cep)
+            .then(
           (String? erro) {
             //deu erro
-            if (erro != null){
+            if (erro != null) {
               mostrarSnackBar(context: context, texto: erro);
-
-            }else{
-              //deu certo
-              mostrarSnackBar(context: context, texto: "Cadastro efetuado com sucesso", isErro: false);
-
             }
           },
-          );       
+        );
       }
-
-    }
-    else {
+    } else {
       print("Form inválido");
     }
   }

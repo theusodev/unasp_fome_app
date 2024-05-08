@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:unasp_fome_app/services/autenticacao_service.dart';
 import 'package:unasp_fome_app/view/NewPageScreen.dart';
 import 'package:unasp_fome_app/view/cart_page.dart';
 import 'package:unasp_fome_app/view/profile_page.dart';
@@ -31,6 +32,14 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("UnaspFome")),
+      drawer: Drawer(
+        child: ListView(children: [
+          ListTile(leading: Icon(Icons.logout), title: Text("Deslogar"), onTap: () {
+            AutenticacaoService().deslogar();
+          },)
+        ],),
+      ),
       body: _telas[_indiceAtual],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
