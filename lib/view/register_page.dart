@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:flutter/foundation.dart';
+import 'package:unasp_fome_app/common/meu_snackbar.dart';
 import 'package:unasp_fome_app/services/autenticacao_service.dart';
 import 'package:unasp_fome_app/view/home_page.dart';
 
@@ -405,24 +406,21 @@ class _RegisterpageState extends State<Registerpage> {
       if (queroCadastrar){
         print("Entrada validada");
         print("${_nomeController.text}, ${_nascimentoController.text}, ${_cpfController.text}, ${_emailController.text}, ${_senhaController.text}, ${_telefoneController.text}, ${_enderecoController.text}, ${_complementoController.text}, ${_cepController.text}");
-        _autentService.cadastrarUsuario(nome: nome, nascimento: nascimento, cpf: cpf, email: email, senha: senha, telefone: telefone, endereco: endereco, complemento: complemento, cep: cep);       
+        _autentService.cadastrarUsuario(nome: nome, nascimento: nascimento, cpf: cpf, email: email, senha: senha, telefone: telefone, endereco: endereco, complemento: complemento, cep: cep).then(
+          (String? erro) {
+            //deu erro
+            if (erro != null){
+              mostrarSnackBar(context: context, texto: erro);
+
+            }else{
+              //deu certo
+              mostrarSnackBar(context: context, texto: "Cadastro efetuado com sucesso", isErro: false);
+
+            }
+          },
+          );       
       }
 
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Sucesso'),
-            content: Text('Cadastro realizado com sucesso!'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {},
-                child: Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
     }
     else {
       print("Form inválido");
