@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:unasp_fome_app/services/autenticacao_service.dart';
 import 'package:unasp_fome_app/view/NewPageScreen.dart';
 import 'package:unasp_fome_app/view/cart_page.dart';
@@ -37,6 +38,7 @@ class _HomepageState extends State<Homepage> {
         child: ListView(children: [
           ListTile(leading: Icon(Icons.logout), title: Text("Deslogar"), onTap: () {
             AutenticacaoService().deslogar();
+            GoogleSignIn().signOut();
           },)
         ],),
       ),

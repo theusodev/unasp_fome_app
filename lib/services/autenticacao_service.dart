@@ -43,7 +43,7 @@ class AutenticacaoService {
     }
   }
 
-  Future<void> deslogar() {
+  Future<void> deslogar() async {
     return _firebaseAuth.signOut();
   }
 }
