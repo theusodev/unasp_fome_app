@@ -1,10 +1,14 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
+
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart%20';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:unasp_fome_app/services/autenticacao_service.dart';
 import 'package:unasp_fome_app/view/NewPageScreen.dart';
 import 'package:unasp_fome_app/view/cart_page.dart';
+import 'package:unasp_fome_app/view/initial_page.dart';
 import 'package:unasp_fome_app/view/profile_page.dart';
 import 'package:unasp_fome_app/view/search_page.dart';
 
@@ -16,63 +20,69 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  int _indiceAtual = 0;
-  final List<Widget> _telas = [
-    NewPageScreen("Home"),
-    NewPageScreen("Procurar"),
-    NewPageScreen("Carrinho"),
-    NewPageScreen("Perfil")
-  ];
+  int paginaAtual = 0;
+  late PageController pc;
+ 
 
-  void onTabTapped(int index) {
+  @override
+  void initState() {
+    super.initState();
+    pc = PageController(initialPage: paginaAtual);
+  }
+
+  setPaginaAtual(pagina) {
     setState(() {
-      _indiceAtual = index;
+      paginaAtual = pagina;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("UnaspFome")),
-      drawer: Drawer(
-        child: ListView(children: [
-          ListTile(leading: Icon(Icons.logout), title: Text("Deslogar"), onTap: () {
-            AutenticacaoService().deslogar();
-            GoogleSignIn().signOut();
-          },)
-        ],),
+    return Scaffold(      
+      body: PageView(
+        controller: pc,
+        children: [
+          InitialPage(),
+          Searchpage(),
+          Cartpage(),
+          Profilepage()
+        ],
+        onPageChanged: setPaginaAtual,
       ),
-      body: _telas[_indiceAtual],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: _indiceAtual,
-        onTap: onTabTapped,
         backgroundColor: Color(0xFFCECECE),
+
+        currentIndex: paginaAtual,
         items: [
           BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/images/home_icon_Outlined.png',
-              width: 24,
-              height: 24,
-            ),
+            icon: Icon(Icons.home, color: Colors.black),
             label: "Home",
+            activeIcon: Icon(Icons.home, color: Colors.orange),
           ),
+          
           BottomNavigationBarItem(
-            icon: Image.asset('assets/images/search_icon_Outlined.png',
-                width: 24, height: 24),
+            icon: Icon(Icons.search, color: Colors.black),
             label: "Procurar",
+            activeIcon: Icon(Icons.search, color: Colors.orange)
           ),
-          BottomNavigationBarItem(
-            icon: Image.asset('assets/images/kart_icon_Outlined.png',
-                width: 24, height: 24),
+          
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart, color: Colors.black,),
             label: "Carrinho",
+            activeIcon: Icon(Icons.shopping_cart, color: Colors.orange)
           ),
-          BottomNavigationBarItem(
-            icon: Image.asset('assets/images/profile_icon_Outlined.png',
-                width: 24, height: 24),
+          
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle, color: Colors.black),
             label: "Perfil",
-          ),
+            activeIcon: Icon(Icons.account_circle, color: Colors.orange)
+            ),
         ],
+        onTap: (pagina){
+          pc.animateToPage(pagina, duration: Duration(milliseconds: 400), curve: Curves.ease);
+          
+        },
       ),
     );
   }
