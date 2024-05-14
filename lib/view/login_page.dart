@@ -89,10 +89,15 @@ class _LoginPageState extends State<LoginPage> {
                           borderSide: BorderSide(color: Colors.red, width: 2)),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.0))),
-                  validator: MultiValidator([
-                    RequiredValidator(errorText: 'Insira um e-mail'),
-                    EmailValidator(errorText: 'Insira um e-mail válido')
-                  ]),
+                  validator: (value) {
+                      if(value!.isEmpty){
+                        return"Insira um e-mail";
+                      }
+
+                      if(!value.contains("@")){
+                        return 'Insira um e-mail válido';
+                      }
+                    },
                 ),
                 SizedBox(height: 16.0),
 

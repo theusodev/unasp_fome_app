@@ -229,10 +229,15 @@ class _RegisterpageState extends State<Registerpage> {
                   padding: const EdgeInsets.all(12.0),
                   child: TextFormField(
                     controller: _emailController,
-                    validator: MultiValidator([
-                      RequiredValidator(errorText: 'Insira seu E-mail'),
-                      EmailValidator(errorText: 'Insira um E-mail válido')
-                    ]),
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return"Insira um e-mail";
+                      }
+
+                      if(!value.contains("@")){
+                        return 'Insira um e-mail válido';
+                      }
+                    },
                     decoration: InputDecoration(
                         labelText: 'E-mail',
                         errorStyle: TextStyle(fontSize: 18.0),
