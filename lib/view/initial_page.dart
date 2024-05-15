@@ -79,22 +79,32 @@ class _InitialPageState extends State<InitialPage> {
                 style: TextStyle(color: Colors.black, fontSize: 24),
               ),
             ),
-            // Expanded(
-            //     child: Consumer<CartModel>(builder: (context, value, child) {
-            //       return GridView.builder(
-            //         itemCount: value.produtosItens,
-            //         gridDelegate:
-            //             const SliverGridDelegateWithFixedCrossAxisCount(
-            //                 crossAxisCount: 2),
-            //         itemBuilder: (context, index) {
-            //           return ProdutosPage(
-            //             produtoNome: value.produtosItens[index][0],
-            //             produtoPreco: value.produtosItens[index][1],
-            //             produtoImagem: value.produtosItens[index][2],
-            //           );
-            //         });
-            //     },),
-            //     )
+
+            //PRESTA ATENÇÃO AQUI
+            Container(
+                height: MediaQuery.of(context).size.height * 0.5,
+                child: Consumer<CartModel>(
+                  builder: (context, value, child) {
+                    return GridView.builder(
+                      padding: EdgeInsets.all(12),
+                      itemCount: value.produtosItens.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 1,
+                                childAspectRatio: 1.8/ 1),
+                        itemBuilder: (context, index) {
+                          return ProdutosPage(
+                            produtoNome: value.produtosItens[index][0],
+                            produtoPreco: value.produtosItens[index][1],
+                            produtoImagem: value.produtosItens[index][2],
+                            onPressed: () {
+                              Provider.of<CartModel>(context, listen: false)
+                                .addItens(index);
+                            },
+                          );
+                        });
+                  },
+                ))
           ],
         ),
       ),

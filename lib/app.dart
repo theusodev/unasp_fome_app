@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:unasp_fome_app/model/cart_model.dart';
 import 'package:unasp_fome_app/view/home_page.dart';
 import 'package:unasp_fome_app/view/login_page.dart';
 import 'package:unasp_fome_app/view/login_page.dart';
@@ -12,12 +14,14 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: RoteadorTela(),
+    return ChangeNotifierProvider(
+      create: (context) => CartModel(),
+      child: const MaterialApp(
+        home: RoteadorTela(),
+      ),
     );
   }
 }
-
 class RoteadorTela extends StatelessWidget {
   const RoteadorTela({super.key});
 
