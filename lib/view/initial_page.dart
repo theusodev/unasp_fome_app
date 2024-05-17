@@ -91,7 +91,7 @@ class _InitialPageState extends State<InitialPage> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 1,
-                                childAspectRatio: 1.8/ 1),
+                                childAspectRatio: 1.90/ 1),
                         itemBuilder: (context, index) {
                           return ProdutosPage(
                             produtoNome: value.produtosItens[index][0],
