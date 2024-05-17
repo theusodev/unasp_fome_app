@@ -5,9 +5,10 @@ class CartModel extends ChangeNotifier {
   //lista de produtos
   final List _produtosItens = [
     // [produtoNome, produtoPreco, produtoImagem]
-    ["Google 1", "10.00", "assets/images/Google_Login.png"],
-    ["Google 2", "20.00", "assets/images/Google_Login.png"],
-    ["Google 3", "30.00", "assets/images/Google_Login.png"],
+    ["Lanche Natural", "6.00", "assets/images/lanchenatural.png"],
+    ["Bolinho de Grão de Bico", "7.50", "assets/images/bolinhograodebico.png"],
+    ["Croassaint", "6.00", "assets/images/croassaint.png"],
+    ["Suco Natural de Laranja", "4.00", "assets/images/suconatural.png"],
   ];
 
   //lista de produtos no carrinho

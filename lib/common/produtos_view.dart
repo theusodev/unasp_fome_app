@@ -31,8 +31,8 @@ class ProdutosPage extends StatelessWidget {
           Container(
             child: Image.asset(
               produtoImagem,
-              height: 55,
-              width: 55,
+              height: 50,
+              width: 50,
               alignment: Alignment.center,
             ),
             alignment: Alignment.bottomLeft,
