@@ -11,19 +11,15 @@ class Cartpage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        title: Text("Meu carrinho",
+        style: TextStyle(fontSize: 36,
+        fontWeight: FontWeight.bold),),
       ),
       body: Consumer<CartModel>(builder: (context, value, child) {
         return Column(
         
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Text("Meu carrinho",
-          style: TextStyle(
-            fontSize: 36,
-            fontWeight: FontWeight.bold
-          ),),
-          ),
           //lista de itens do carrinho
           Expanded(child: ListView.builder(
             itemCount: value.itensCart.length,

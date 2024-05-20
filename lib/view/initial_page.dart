@@ -21,26 +21,18 @@ class _InitialPageState extends State<InitialPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Tela inicial"),
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text("Bem-vindo",
+        style: TextStyle(fontSize: 36,
+        fontWeight: FontWeight.bold),),
       ),
+
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,          
           children: [
-            //titulo bem vindo
-            Align(
-              alignment: Alignment.topCenter,
-              child: Text(
-                "Bem-Vindo",
-                style: TextStyle(
-                  color: Colors.orange,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                ),
-              ),
-            ),
             SizedBox(height: 16),
 
             //titulo ultimos pedidos
@@ -82,16 +74,16 @@ class _InitialPageState extends State<InitialPage> {
 
             //PRESTA ATENÇÃO AQUI
             Container(
-                height: MediaQuery.of(context).size.height * 0.5,
+                height: MediaQuery.of(context).size.height * 0.58,
+                width: MediaQuery.of(context).size.width * 1,
                 child: Consumer<CartModel>(
                   builder: (context, value, child) {
                     return GridView.builder(
-                      padding: EdgeInsets.all(12),
-                      itemCount: value.produtosItens.length,
+                        padding: EdgeInsets.all(12),
+                        itemCount: value.produtosItens.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 1,
-                                childAspectRatio: 1.90/ 1),
+                                crossAxisCount: 1, childAspectRatio: 1.90 / 1),
                         itemBuilder: (context, index) {
                           return ProdutosPage(
                             produtoNome: value.produtosItens[index][0],
@@ -99,7 +91,7 @@ class _InitialPageState extends State<InitialPage> {
                             produtoImagem: value.produtosItens[index][2],
                             onPressed: () {
                               Provider.of<CartModel>(context, listen: false)
-                                .addItens(index);
+                                  .addItens(index);
                             },
                           );
                         });

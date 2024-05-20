@@ -43,7 +43,7 @@ class _HomepageState extends State<Homepage> {
         controller: pc,
         children: [
           InitialPage(),
-          Searchpage(),
+          SearchPage(),
           Cartpage(),
           Profilepage()
         ],
