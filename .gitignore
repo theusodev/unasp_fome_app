@@ -49,3 +49,11 @@ android/app/google-services.json
 ios/firebase_app_id_file.json
 ios/Runner/GoogleServices-Info.plist
 lib/firebase_options.dart
+
+ios/Flutter/Generated.xcconfig
+        ios/Flutter/flutter_export_environment.sh
+        ios/Runner/GeneratedPluginRegistrant.h
+        ios/Runner/GeneratedPluginRegistrant.m
+        linux/flutter/generated_plugin_registrant.cc
+        linux/flutter/generated_plugin_registrant.h
+        linux/flutter/generated_plugins.cmake
