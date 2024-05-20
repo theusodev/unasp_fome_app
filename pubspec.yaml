@@ -78,6 +78,12 @@ flutter:
     - assets\images\croassaint.png
     - assets\images\lanchenatural.png
     - assets\images\suconatural.png
+    - assets\images\cafedamanha.png
+    - assets\images\almoco.png
+    - assets\images\bebidas.png
+    - assets\images\lanches.png
+    - assets\images\sobremesas.png
+    - assets\images\janta.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
