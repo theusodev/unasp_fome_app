@@ -26,40 +26,56 @@ class ProdutosPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: Colors.black, width: 1)),
         child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          //imagem
-          Container(
-            child: Image.asset(
-              produtoImagem,
-              height: 50,
-              width: 50,
-              alignment: Alignment.center,
+            Column(mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+            Row(
+              children: [
+                Column(
+                  children: [
+                  Align(alignment: Alignment.center,),
+                    //imagem
+                    SizedBox(
+                      child: Image.asset(
+                        produtoImagem,
+                        height: 60,
+                        width: 60,
+                      ),
+                    ),
+                  ],
+                ),
+                Spacer(),
+                Column(
+                  children: [
+                    //nome
+                    SizedBox(
+                      child: Text(
+                        produtoNome,
+                        style: TextStyle(fontSize: 17,color:Colors.blue[900]),
+                      ),
+                    ),
+                  ],
+                ),
+                Spacer(),
+                Column(
+                  children: [
+                    SizedBox(
+                      child: MaterialButton(
+                        onPressed: onPressed,
+                        color: Colors.orange,
+                        child: Text("R\$ " + produtoPreco,
+                            style: const TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
-            alignment: Alignment.bottomLeft,
-          ),
-
-          //nome
-          Container(
-            child: Text(produtoNome,
-            style: TextStyle(
-              fontSize: 17
-            ),),
-            alignment: Alignment.center,
-          ),
-
-          //preço
-          Container(
-              child: MaterialButton(
-            onPressed: onPressed,
-            color: Colors.orange,
-            child: Text("R\$ " + produtoPreco,
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Colors.white, fontWeight: FontWeight.bold)),
-          ),
-          alignment: Alignment.centerRight,
-          ),
-        ]),
+          ]
+        ),
       ),
     );
   }

@@ -106,6 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _senhaController,
                   decoration: InputDecoration(
                       labelText: 'Senha',
+                      //erro de senha inicia aqui
                       errorStyle: TextStyle(fontSize: 18.0),
                       errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.0),

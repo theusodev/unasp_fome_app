@@ -11,7 +11,6 @@ import 'package:unasp_fome_app/model/cart_model.dart';
 
 class InitialPage extends StatefulWidget {
   const InitialPage({super.key});
-
   @override
   State<InitialPage> createState() => _InitialPageState();
 }
@@ -61,6 +60,8 @@ class _InitialPageState extends State<InitialPage> {
                         ))),
               ),
             ),
+
+            
             SizedBox(height: 26),
 
             //sugestoes do chef
@@ -83,7 +84,7 @@ class _InitialPageState extends State<InitialPage> {
                         itemCount: value.produtosItens.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 1, childAspectRatio: 1.90 / 1),
+                                crossAxisCount: 1, childAspectRatio: 2.80 / 1),
                         itemBuilder: (context, index) {
                           return ProdutosPage(
                             produtoNome: value.produtosItens[index][0],
