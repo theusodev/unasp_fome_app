@@ -66,7 +66,6 @@ class ProdutosPage extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: 25,
-                    width: 70,
                     child: MaterialButton(
                       onPressed: onPressed,
                       color: Colors.orange,
