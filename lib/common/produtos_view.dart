@@ -25,57 +25,63 @@ class ProdutosPage extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: Colors.black, width: 1)),
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-            Row(
-              children: [
-                Column(
-                  children: [
-                  Align(alignment: Alignment.center,),
-                    //imagem
-                    SizedBox(
-                      child: Image.asset(
-                        produtoImagem,
-                        height: 60,
-                        width: 60,
-                      ),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+          Row(
+            children: [
+              Column(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                  ),
+                  //imagem
+                  SizedBox(
+                    child: Image.asset(
+                      produtoImagem,
+                      height: 60,
+                      width: 60,
                     ),
-                  ],
-                ),
-                Spacer(),
-                Column(
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Column(
                   children: [
                     //nome
                     SizedBox(
                       child: Text(
                         produtoNome,
-                        style: TextStyle(fontSize: 17,color:Colors.blue[900]),
+                        softWrap: true,
+                        style: TextStyle(fontSize: 14, color: Colors.blue[900], fontWeight: FontWeight.w500),
                       ),
                     ),
                   ],
                 ),
-                Spacer(),
-                Column(
-                  children: [
-                    SizedBox(
-                      child: MaterialButton(
-                        onPressed: onPressed,
-                        color: Colors.orange,
-                        child: Text("R\$ " + produtoPreco,
-                            style: const TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ]
-        ),
+              ),
+              SizedBox(width: 10),
+              Column(
+                children: [
+                  SizedBox(
+                    height: 25,
+                    width: 70,
+                    child: MaterialButton(
+                      onPressed: onPressed,
+                      color: Colors.orange,
+                      child: Text("R\$ " + produtoPreco,
+                          style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ]),
       ),
     );
   }
