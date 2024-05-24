@@ -9,8 +9,11 @@ class Profilepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Tela de perfil"),
-        backgroundColor: Colors.orange,
+        title: Text("Meu perfil",
+        style: TextStyle(fontSize: 36,
+        fontWeight: FontWeight.bold),),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       drawer: Drawer(
         child: ListView(children: [

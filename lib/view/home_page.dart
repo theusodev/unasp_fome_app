@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart%20';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:unasp_fome_app/services/autenticacao_service.dart';
-import 'package:unasp_fome_app/view/NewPageScreen.dart';
 import 'package:unasp_fome_app/view/cart_page.dart';
 import 'package:unasp_fome_app/view/initial_page.dart';
 import 'package:unasp_fome_app/view/profile_page.dart';
