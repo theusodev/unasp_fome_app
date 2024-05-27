@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:unasp_fome_app/common/produtos_view.dart';
+import 'package:unasp_fome_app/model/cart_model.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -11,18 +13,13 @@ class _SearchPageState extends State<SearchPage> {
   final TextEditingController _pesquisarController = TextEditingController();
   bool pesquisarClicado = false;
   String pesquisarText = '';
-  List<String> itens = [
-    'Lanche Natural',
-    'Bolinho de Grão de Bico',
-    'Crassaint',
-    'Suco Natural de Laranja',
-  ];
+  CartModel cartModel = CartModel();
+  List<List<dynamic>> filtroItens = [];
 
-  List<String> filtroItens = [];
   @override
   void initState() {
     super.initState();
-    filtroItens = List.from(itens);
+    filtroItens = List<List<dynamic>>.from(cartModel.produtosItens);
   }
 
   void _onPesquisarChanged(String value) {
@@ -34,11 +31,12 @@ class _SearchPageState extends State<SearchPage> {
 
   void myFiltrosItens() {
     if (pesquisarText.isEmpty) {
-      filtroItens = List.from(itens);
+      filtroItens = List.from(cartModel.produtosItens);
     } else {
-      filtroItens = itens
+      filtroItens = cartModel.produtosItens
           .where((item) =>
-              item.toLowerCase().contains(pesquisarText.toLowerCase()))
+              item[0].toLowerCase().contains(pesquisarText.toLowerCase()))
+          .map((item) => item as List<dynamic>) // map para garantir o tipo correto
           .toList();
     }
   }
@@ -122,7 +120,7 @@ class _SearchPageState extends State<SearchPage> {
                   itemCount: filtroItens.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(filtroItens[index]),
+                      title: Text(filtroItens[index][0]),
                     );
                   },
                 ),

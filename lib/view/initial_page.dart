@@ -79,7 +79,7 @@ class _InitialPageState extends State<InitialPage> {
             //PRESTA ATENÇÃO AQUI
             //container responsavel por mostrar todos os produtos, os itens vem do model cartmodel
             Container(
-                height: MediaQuery.of(context).size.height * 0.61,
+                height: MediaQuery.of(context).size.height * 0.5,
                 width: MediaQuery.of(context).size.width * 1,
                 child: Consumer<CartModel>(
                   builder: (context, value, child) {
