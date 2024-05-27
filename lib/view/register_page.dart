@@ -62,9 +62,12 @@ class _RegisterpageState extends State<Registerpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //aqui é a tela de registro
       appBar: AppBar(
         title: Text('Tela de Registro'),
       ),
+      
+      //aqui começa toda a estrutura da tela de registro, os formularios e tudo mais
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(12.0),

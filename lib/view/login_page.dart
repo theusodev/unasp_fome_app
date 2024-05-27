@@ -55,6 +55,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //view da tela de login
+      //aqui começa a estrutura da tela
       body: SingleChildScrollView(
         padding:
             EdgeInsets.all(16.0), //essa merda aqui é a distancia das bordas
@@ -106,6 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _senhaController,
                   decoration: InputDecoration(
                       labelText: 'Senha',
+                      //erro de senha inicia aqui
                       errorStyle: TextStyle(fontSize: 18.0),
                       errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.0),
@@ -201,6 +204,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  //logicas para os botões funcionarem
   botaoEntrarClicado() {
 
     String email = _emailController.text;

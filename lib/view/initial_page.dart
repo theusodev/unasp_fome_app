@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart%20';
@@ -11,7 +9,6 @@ import 'package:unasp_fome_app/model/cart_model.dart';
 
 class InitialPage extends StatefulWidget {
   const InitialPage({super.key});
-
   @override
   State<InitialPage> createState() => _InitialPageState();
 }
@@ -20,6 +17,8 @@ class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //aqui é a view responsavel pela tela home
+      //titulo "bem vindo" no topo da tela
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -28,6 +27,7 @@ class _InitialPageState extends State<InitialPage> {
         fontWeight: FontWeight.bold),),
       ),
 
+      //aqui começa toda a estrutura da tela
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -46,7 +46,7 @@ class _InitialPageState extends State<InitialPage> {
 
             SizedBox(height: 26),
 
-            //barra com ultimos produtos comprados
+            //barra carrossel com ultimos produtos comprados
             SizedBox(
               height: kToolbarHeight,
               child: ListView(
@@ -61,6 +61,8 @@ class _InitialPageState extends State<InitialPage> {
                         ))),
               ),
             ),
+
+            
             SizedBox(height: 26),
 
             //sugestoes do chef
@@ -73,8 +75,9 @@ class _InitialPageState extends State<InitialPage> {
             ),
 
             //PRESTA ATENÇÃO AQUI
+            //container responsavel por mostrar todos os produtos, os itens vem do model cartmodel
             Container(
-                height: MediaQuery.of(context).size.height * 0.61,
+                height: MediaQuery.of(context).size.height * 0.5,
                 width: MediaQuery.of(context).size.width * 1,
                 child: Consumer<CartModel>(
                   builder: (context, value, child) {
@@ -83,7 +86,7 @@ class _InitialPageState extends State<InitialPage> {
                         itemCount: value.produtosItens.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 1, childAspectRatio: 1.90 / 1),
+                                crossAxisCount: 1, childAspectRatio: 2.80 / 1),
                         itemBuilder: (context, index) {
                           return ProdutosPage(
                             produtoNome: value.produtosItens[index][0],

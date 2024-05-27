@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//VIEW RESPONSAVEL PELAS CAIXINHAS DOS PRODUTOS NA TELA INICIAL
+
 class ProdutosPage extends StatelessWidget {
   final String produtoNome;
   final String produtoPreco;
@@ -25,39 +27,60 @@ class ProdutosPage extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: Colors.black, width: 1)),
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          //imagem
-          Container(
-            child: Image.asset(
-              produtoImagem,
-              height: 50,
-              width: 50,
-              alignment: Alignment.center,
-            ),
-            alignment: Alignment.bottomLeft,
-          ),
-
-          //nome
-          Container(
-            child: Text(produtoNome,
-            style: TextStyle(
-              fontSize: 17
-            ),),
-            alignment: Alignment.center,
-          ),
-
-          //preço
-          Container(
-              child: MaterialButton(
-            onPressed: onPressed,
-            color: Colors.orange,
-            child: Text("R\$ " + produtoPreco,
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Colors.white, fontWeight: FontWeight.bold)),
-          ),
-          alignment: Alignment.centerRight,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+          Row(
+            children: [
+              Column(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                  ),
+                  //imagem
+                  SizedBox(
+                    child: Image.asset(
+                      produtoImagem,
+                      height: 60,
+                      width: 60,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Column(
+                  children: [
+                    //nome
+                    SizedBox(
+                      child: Text(
+                        produtoNome,
+                        softWrap: true,
+                        style: TextStyle(fontSize: 14, color: Colors.blue[900], fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: 10),
+              Column(
+                children: [
+                  SizedBox(
+                    height: 25,
+                    child: MaterialButton(
+                      onPressed: onPressed,
+                      color: Colors.orange,
+                      child: Text("R\$ " + produtoPreco,
+                          style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  )
+                ],
+              ),
+            ],
           ),
         ]),
       ),

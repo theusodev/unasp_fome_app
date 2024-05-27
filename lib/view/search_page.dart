@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:unasp_fome_app/common/produtos_view.dart';
+import 'package:unasp_fome_app/model/cart_model.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -11,18 +13,13 @@ class _SearchPageState extends State<SearchPage> {
   final TextEditingController _pesquisarController = TextEditingController();
   bool pesquisarClicado = false;
   String pesquisarText = '';
-  List<String> itens = [
-    'Lanche Natural',
-    'Bolinho de Grão de Bico',
-    'Crassaint',
-    'Suco Natural de Laranja',
-  ];
+  CartModel cartModel = CartModel();
+  List<List<dynamic>> filtroItens = [];
 
-  List<String> filtroItens = [];
   @override
   void initState() {
     super.initState();
-    filtroItens = List.from(itens);
+    filtroItens = List<List<dynamic>>.from(cartModel.produtosItens);
   }
 
   void _onPesquisarChanged(String value) {
@@ -34,11 +31,12 @@ class _SearchPageState extends State<SearchPage> {
 
   void myFiltrosItens() {
     if (pesquisarText.isEmpty) {
-      filtroItens = List.from(itens);
+      filtroItens = List.from(cartModel.produtosItens);
     } else {
-      filtroItens = itens
+      filtroItens = cartModel.produtosItens
           .where((item) =>
-              item.toLowerCase().contains(pesquisarText.toLowerCase()))
+              item[0].toLowerCase().contains(pesquisarText.toLowerCase()))
+          .map((item) => item as List<dynamic>) // map para garantir o tipo correto
           .toList();
     }
   }
@@ -46,6 +44,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //essa é a view da tela de pesquisa
       appBar: AppBar(
         title: pesquisarClicado
             ? Container(
@@ -77,11 +76,15 @@ class _SearchPageState extends State<SearchPage> {
           IconButton(
             onPressed: () {
               setState(() {
-                pesquisarClicado = !pesquisarClicado;
-                if (!pesquisarClicado) {
-                  _pesquisarController.clear();
+                if (pesquisarClicado) {
+                  // Realizar a pesquisa ao clicar no botão
                   myFiltrosItens();
+                } else {
+                  // Limpar a pesquisa e campo de texto quando o botão de fechar é pressionado
+                  _pesquisarController.clear();
+                  filtroItens = List<List<dynamic>>.from(cartModel.produtosItens);
                 }
+                pesquisarClicado = !pesquisarClicado;
               });
             },
             icon: Icon(pesquisarClicado ? Icons.close : Icons.search),
@@ -92,29 +95,42 @@ class _SearchPageState extends State<SearchPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(padding: EdgeInsets.all(16)),
-            Container(
-              height: 150,
-              width: 380,
-              decoration: 
-              BoxDecoration(
-                border: Border.all(
-                    color: Colors.black,
-                    width: 1), // Define a cor e a largura da borda
-                borderRadius: BorderRadius.circular(
-                    12), // Adicione um raio para bordas arredondadas, se desejar
-              ),
-              child: SizedBox(
-                child: ListView.builder(
-                  itemCount: filtroItens.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(filtroItens[index]),
-                    );
-                  },
+            if (pesquisarClicado) // Mostrar título "Pesquisas" apenas quando a pesquisa estiver aberta
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: SizedBox(
+                    child: Text(
+                      "Pesquisas",
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
               ),
-            ),
+            if (pesquisarClicado)
+              Container(
+                height: 150,
+                width: 380,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: Colors.black,
+                      width: 1), // Define a cor e a largura da borda
+                  borderRadius: BorderRadius.circular(12), // Adicione um raio para bordas arredondadas, se desejar
+                ),
+                child: SizedBox(
+                  child: ListView.builder(
+                    itemCount: filtroItens.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(filtroItens[index][0]),
+                        subtitle: Text("Preço: R\$ ${filtroItens[index][1]}"),
+                        leading: Image.asset(filtroItens[index][2]),
+                      );
+                    },
+                  ),
+                ),
+              ),
             const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.all(12),
