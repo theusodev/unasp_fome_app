@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart%20';
-import 'package:flutter/widgets.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:unasp_fome_app/common/produtos_view.dart';
 import 'package:unasp_fome_app/model/cart_model.dart';
+import 'package:unasp_fome_app/view/produto_detalhes_page.dart';
 
 class InitialPage extends StatefulWidget {
   const InitialPage({super.key});
@@ -17,25 +15,20 @@ class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //aqui é a view responsavel pela tela home
-      //titulo "bem vindo" no topo da tela
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text("Bem-vindo",
-        style: TextStyle(fontSize: 36,
-        fontWeight: FontWeight.bold),),
+        title: Text(
+          "Bem-vindo",
+          style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+        ),
       ),
-
-      //aqui começa toda a estrutura da tela
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,          
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(height: 16),
-
-            //titulo ultimos pedidos
             Align(
               alignment: Alignment.topLeft,
               child: Text(
@@ -43,10 +36,7 @@ class _InitialPageState extends State<InitialPage> {
                 style: TextStyle(color: Colors.black, fontSize: 24),
               ),
             ),
-
             SizedBox(height: 26),
-
-            //barra carrossel com ultimos produtos comprados
             SizedBox(
               height: kToolbarHeight,
               child: ListView(
@@ -61,11 +51,7 @@ class _InitialPageState extends State<InitialPage> {
                         ))),
               ),
             ),
-
-            
             SizedBox(height: 26),
-
-            //sugestoes do chef
             Align(
               alignment: Alignment.topLeft,
               child: Text(
@@ -73,33 +59,42 @@ class _InitialPageState extends State<InitialPage> {
                 style: TextStyle(color: Colors.black, fontSize: 24),
               ),
             ),
-
-            //PRESTA ATENÇÃO AQUI
-            //container responsavel por mostrar todos os produtos, os itens vem do model cartmodel
             Container(
-                height: MediaQuery.of(context).size.height * 0.5,
-                width: MediaQuery.of(context).size.width * 1,
-                child: Consumer<CartModel>(
-                  builder: (context, value, child) {
-                    return GridView.builder(
-                        padding: EdgeInsets.all(12),
-                        itemCount: value.produtosItens.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 1, childAspectRatio: 2.80 / 1),
-                        itemBuilder: (context, index) {
-                          return ProdutosPage(
-                            produtoNome: value.produtosItens[index][0],
-                            produtoPreco: value.produtosItens[index][1],
-                            produtoImagem: value.produtosItens[index][2],
-                            onPressed: () {
-                              Provider.of<CartModel>(context, listen: false)
-                                  .addItens(index);
-                            },
+              height: MediaQuery.of(context).size.height * 0.5,
+              width: MediaQuery.of(context).size.width * 1,
+              child: Consumer<CartModel>(
+                builder: (context, value, child) {
+                  return GridView.builder(
+                    padding: EdgeInsets.all(12),
+                    itemCount: value.produtosItens.length,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1,
+                      childAspectRatio: 2.80 / 1,
+                    ),
+                    itemBuilder: (context, index) {
+                      return ProdutosPage(
+                        produtoNome: value.produtosItens[index][0],
+                        produtoPreco: value.produtosItens[index][1],
+                        produtoImagem: value.produtosItens[index][2],
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProdutoDetalhesPage(
+                                produtoNome: value.produtosItens[index][0],
+                                produtoPreco: value.produtosItens[index][1],
+                                produtoImagem: value.produtosItens[index][2],
+                                produtoDescricao: value.produtosItens[index][3], // Assumindo que a descrição está no índice 3
+                              ),
+                            ),
                           );
-                        });
-                  },
-                ))
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

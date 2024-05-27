@@ -7,11 +7,11 @@ class CartModel extends ChangeNotifier {
   //lista de produtos
   final List produtosItens = [
     // [produtoNome, produtoPreco, produtoImagem]
-    ["Lanche Natural", "6.00", "assets/images/lanchenatural.png"],
-    ["Bolinho de Grão de Bico", "7.50", "assets/images/bolinhograodebico.png"],
-    ["Croassaint", "6.00", "assets/images/croassaint.png"],
-    ["Suco Natural de Laranja", "4.00", "assets/images/suconatural.png"],
-    ["Suco Natural de Manga", "4.00", "assets/images/suconatural.png"],
+    ["Lanche Natural", "6.00", "assets/images/lanchenatural.png","O lanche natual é gostoso demais"],
+    ["Bolinho de Grão de Bico", "7.50", "assets/images/bolinhograodebico.png", "O boliinho é 1000grau"],
+    ["Croassaint", "6.00", "assets/images/croassaint.png", "Croassaint de frango é melhor"],
+    ["Suco Natural de Laranja", "4.00", "assets/images/suconatural.png", "Melhor suco do mundo"],
+    ["Suco Natural de Manga", "4.00", "assets/images/suconatural.png", "Suco de"],
   ];
 
   //lista de produtos no carrinho
