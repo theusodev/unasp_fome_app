@@ -8,6 +8,8 @@ class Cartpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //essa é a tela de carrinho
+      //nome "meu carrinho" no topo da tela
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -15,9 +17,11 @@ class Cartpage extends StatelessWidget {
         style: TextStyle(fontSize: 36,
         fontWeight: FontWeight.bold),),
       ),
+      
+      //consumindo a classe do CartModel onde armazena os itens de carrinho
       body: Consumer<CartModel>(builder: (context, value, child) {
+        //aqui inicia a lista de produtos quando adicionados
         return Column(
-        
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //lista de itens do carrinho
@@ -45,6 +49,7 @@ class Cartpage extends StatelessWidget {
               );
             })),
 
+            //botão cinza de valor total no final da tela
             Padding(
               padding: const EdgeInsets.all(36.0),
               child: Container(

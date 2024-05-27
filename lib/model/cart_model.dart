@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//AQUI É O MODEL DE CARRINHO, ONDE ADICIONAMOS OS PRODUTOS QUE VÃO PRA TELA INICIAL E CARRINHO
+
 class CartModel extends ChangeNotifier {
   //lista de produtos
   final List _produtosItens = [

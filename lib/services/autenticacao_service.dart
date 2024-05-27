@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+//AQUI É O SERVIÇO DE AUTENTICAÇÃO PARA USAR O LOGIN DO FIREBASE
 class AutenticacaoService {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 

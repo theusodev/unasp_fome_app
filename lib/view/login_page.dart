@@ -55,6 +55,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //view da tela de login
+      //aqui começa a estrutura da tela
       body: SingleChildScrollView(
         padding:
             EdgeInsets.all(16.0), //essa merda aqui é a distancia das bordas
@@ -202,6 +204,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  //logicas para os botões funcionarem
   botaoEntrarClicado() {
 
     String email = _emailController.text;
