@@ -76,11 +76,15 @@ class _SearchPageState extends State<SearchPage> {
           IconButton(
             onPressed: () {
               setState(() {
-                pesquisarClicado = !pesquisarClicado;
-                if (!pesquisarClicado) {
-                  _pesquisarController.clear();
+                if (pesquisarClicado) {
+                  // Realizar a pesquisa ao clicar no botão
                   myFiltrosItens();
+                } else {
+                  // Limpar a pesquisa e campo de texto quando o botão de fechar é pressionado
+                  _pesquisarController.clear();
+                  filtroItens = List<List<dynamic>>.from(cartModel.produtosItens);
                 }
+                pesquisarClicado = !pesquisarClicado;
               });
             },
             icon: Icon(pesquisarClicado ? Icons.close : Icons.search),
@@ -91,41 +95,42 @@ class _SearchPageState extends State<SearchPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: SizedBox(
-                  child: Text(
-                    "Pesquisas",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            if (pesquisarClicado) // Mostrar título "Pesquisas" apenas quando a pesquisa estiver aberta
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: SizedBox(
+                    child: Text(
+                      "Pesquisas",
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(padding: EdgeInsets.all(16)),
-            Container(
-              height: 150,
-              width: 380,
-              decoration: 
-              BoxDecoration(
-                border: Border.all(
-                    color: Colors.black,
-                    width: 1), // Define a cor e a largura da borda
-                borderRadius: BorderRadius.circular(
-                    12), // Adicione um raio para bordas arredondadas, se desejar
-              ),
-              child: SizedBox(
-                child: ListView.builder(
-                  itemCount: filtroItens.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(filtroItens[index][0]),
-                    );
-                  },
+            if (pesquisarClicado)
+              Container(
+                height: 150,
+                width: 380,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: Colors.black,
+                      width: 1), // Define a cor e a largura da borda
+                  borderRadius: BorderRadius.circular(12), // Adicione um raio para bordas arredondadas, se desejar
+                ),
+                child: SizedBox(
+                  child: ListView.builder(
+                    itemCount: filtroItens.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(filtroItens[index][0]),
+                        subtitle: Text("Preço: R\$ ${filtroItens[index][1]}"),
+                        leading: Image.asset(filtroItens[index][2]),
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
             const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.all(12),
