@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//VIEW RESPONSAVEL PELAS CAIXINHAS DOS PRODUTOS NA TELA INICIAL
+
 class ProdutosPage extends StatelessWidget {
   final String produtoNome;
   final String produtoPreco;

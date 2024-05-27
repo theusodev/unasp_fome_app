@@ -19,6 +19,8 @@ class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //aqui é a view responsavel pela tela home
+      //titulo "bem vindo" no topo da tela
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -27,6 +29,7 @@ class _InitialPageState extends State<InitialPage> {
         fontWeight: FontWeight.bold),),
       ),
 
+      //aqui começa toda a estrutura da tela
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -45,7 +48,7 @@ class _InitialPageState extends State<InitialPage> {
 
             SizedBox(height: 26),
 
-            //barra com ultimos produtos comprados
+            //barra carrossel com ultimos produtos comprados
             SizedBox(
               height: kToolbarHeight,
               child: ListView(
@@ -74,6 +77,7 @@ class _InitialPageState extends State<InitialPage> {
             ),
 
             //PRESTA ATENÇÃO AQUI
+            //container responsavel por mostrar todos os produtos, os itens vem do model cartmodel
             Container(
                 height: MediaQuery.of(context).size.height * 0.61,
                 width: MediaQuery.of(context).size.width * 1,

@@ -46,6 +46,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //essa é a view da tela de pesquisa
       appBar: AppBar(
         title: pesquisarClicado
             ? Container(

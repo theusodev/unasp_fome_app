@@ -16,15 +16,3 @@ void main() async {
   );
   runApp(const App());
 }
-
-// //parte pra chamar model dos produtos para tela 
-// @override
-// Widget build(BuildContext context) {
-//   return ChangeNotifierProvider(
-//     create: (context) => CartModel(),
-//     child: const MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: InitialPage(),
-//     ),
-//   );
-// }

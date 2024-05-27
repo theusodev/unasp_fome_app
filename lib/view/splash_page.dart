@@ -5,7 +5,7 @@ import 'login_page.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
-
+  //essa aqui é a animação que aparece ao abrir o aplicativo
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(milliseconds: 2000), () {

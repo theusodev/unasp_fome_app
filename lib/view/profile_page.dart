@@ -8,10 +8,12 @@ class Profilepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //essa é a view da tela de perfil
       appBar: AppBar(
         title: const Text("Tela de perfil"),
         backgroundColor: Colors.orange,
       ),
+      //o drawer é o botao de tres linhas que abre uma aba na lateral e tem as opções dentro
       drawer: Drawer(
         child: ListView(children: [
           ListTile(leading: Icon(Icons.logout), title: Text("Deslogar"), onTap: () {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart%20';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:unasp_fome_app/services/autenticacao_service.dart';
-import 'package:unasp_fome_app/view/NewPageScreen.dart';
 import 'package:unasp_fome_app/view/cart_page.dart';
 import 'package:unasp_fome_app/view/initial_page.dart';
 import 'package:unasp_fome_app/view/profile_page.dart';
@@ -34,7 +33,8 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(      
+    return Scaffold(     
+      // view responsavel pela barra navegação inferior
       body: PageView(
         controller: pc,
         children: [
@@ -51,24 +51,28 @@ class _HomepageState extends State<Homepage> {
 
         currentIndex: paginaAtual,
         items: [
+          //botao home
           BottomNavigationBarItem(
             icon: Icon(Icons.home, color: Colors.black),
             label: "Home",
             activeIcon: Icon(Icons.home, color: Colors.orange),
           ),
           
+          //botao procurar
           BottomNavigationBarItem(
             icon: Icon(Icons.search, color: Colors.black),
             label: "Procurar",
             activeIcon: Icon(Icons.search, color: Colors.orange)
           ),
           
-          const BottomNavigationBarItem(
+          //botao carrinho
+          BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart, color: Colors.black,),
             label: "Carrinho",
             activeIcon: Icon(Icons.shopping_cart, color: Colors.orange)
           ),
           
+          //botao perfil
           const BottomNavigationBarItem(
             icon: Icon(Icons.account_circle, color: Colors.black),
             label: "Perfil",
