@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unasp_fome_app/model/cart_model.dart';
+import 'produto_detalhes_page.dart';
 import 'categoria_page.dart';
 
 class SearchPage extends StatefulWidget {
@@ -131,10 +132,26 @@ class _SearchPageState extends State<SearchPage> {
                   child: ListView.builder(
                     itemCount: filtroItens.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(filtroItens[index][0]),
-                        subtitle: Text("Preço: R\$ ${filtroItens[index][1]}"),
-                        leading: Image.asset(filtroItens[index][2]),
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProdutoDetalhesPage(
+                                produtoNome: filtroItens[index][0],
+                                produtoPreco: filtroItens[index][1],
+                                produtoImagem: filtroItens[index][4],
+                                produtoDescricao: filtroItens[index][3],
+                                produtoItem: filtroItens[index],
+                              ),
+                            ),
+                          );
+                        },
+                        child: ListTile(
+                          title: Text(filtroItens[index][0]),
+                          subtitle: Text("Preço: R\$ ${filtroItens[index][1]}"),
+                          leading: Image.asset(filtroItens[index][2]),
+                        ),
                       );
                     },
                   ),
