@@ -24,8 +24,8 @@ class CartModel extends ChangeNotifier {
   get itensCart => _itensCart;
 
   //adicionar no carrinho
-  void addItens(int index) {
-    _itensCart.add(produtosItens[index]);
+  void addItem(List<dynamic> item) {
+    _itensCart.add(item);
     notifyListeners();
   }
 

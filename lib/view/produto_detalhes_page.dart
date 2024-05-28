@@ -7,7 +7,7 @@ class ProdutoDetalhesPage extends StatelessWidget {
   final String produtoPreco;
   final String produtoImagem;
   final String produtoDescricao;
-  final int produtoIndex;
+  final List<dynamic> produtoItem;  // Mudança aqui: String -> List<dynamic>
 
   const ProdutoDetalhesPage({
     super.key,
@@ -15,7 +15,7 @@ class ProdutoDetalhesPage extends StatelessWidget {
     required this.produtoPreco,
     required this.produtoImagem,
     required this.produtoDescricao,
-    required this.produtoIndex,
+    required this.produtoItem,
   });
 
   @override
@@ -71,7 +71,7 @@ class ProdutoDetalhesPage extends StatelessWidget {
                     textColor: Colors.white,
                     onPressed: () {
                       Provider.of<CartModel>(context, listen: false)
-                          .addItens(produtoIndex);
+                          .addItem(produtoItem);  // Passar produtoItem como List
                     },
                     child: Text("Adicionar ao Carrinho"),
                     shape: RoundedRectangleBorder(

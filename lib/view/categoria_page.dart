@@ -39,7 +39,7 @@ class CategoriaPage extends StatelessWidget {
                     produtoPreco: items[index][1],
                     produtoImagem: items[index][4],
                     produtoDescricao: items[index][3],
-                    produtoIndex: index,
+                    produtoItem: items[index],
                   ),
                 ),
               );

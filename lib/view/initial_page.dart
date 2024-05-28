@@ -88,7 +88,7 @@ class _InitialPageState extends State<InitialPage> {
                                 produtoPreco: value.produtosItens[index][1],
                                 produtoImagem: value.produtosItens[index][4],
                                 produtoDescricao: value.produtosItens[index][3],
-                                produtoIndex: index,
+                                produtoItem: value.produtosItens[index],
                               ),
                             ),
                           );
