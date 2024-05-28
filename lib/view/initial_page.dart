@@ -24,47 +24,52 @@ class _InitialPageState extends State<InitialPage> {
           style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(height: 16),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "Últimos pedidos",
-                style: TextStyle(color: Colors.black, fontSize: 24),
-              ),
-            ),
-            SizedBox(height: 26),
-            SizedBox(
-              height: kToolbarHeight,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: 
-                  List.generate(
-                    7,
-                    (index) => Padding(
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(height: 16),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Últimos pedidos",
+                    style: TextStyle(color: Colors.black, fontSize: 24),
+                  ),
+                ),
+                SizedBox(height: 26),
+                SizedBox(
+                  height: kToolbarHeight,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: List.generate(
+                      7,
+                      (index) => Padding(
                         padding: EdgeInsets.only(right: 10),
                         child: Image.asset(
                           'assets/images/Google_Login.png',
                           fit: BoxFit.cover,
-                        ))),
-                
-              ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 26),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Sugestões do Cheff",
+                    style: TextStyle(color: Colors.black, fontSize: 24),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 26),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "Sugestões do Cheff",
-                style: TextStyle(color: Colors.black, fontSize: 24),
-              ),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.5,
-              width: MediaQuery.of(context).size.width,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Consumer<CartModel>(
                 builder: (context, value, child) {
                   return GridView.builder(
@@ -99,8 +104,8 @@ class _InitialPageState extends State<InitialPage> {
                 },
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
