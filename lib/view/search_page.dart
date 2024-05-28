@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:unasp_fome_app/common/produtos_view.dart';
 import 'package:unasp_fome_app/model/cart_model.dart';
+import 'categoria_page.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -36,15 +36,28 @@ class _SearchPageState extends State<SearchPage> {
       filtroItens = cartModel.produtosItens
           .where((item) =>
               item[0].toLowerCase().contains(pesquisarText.toLowerCase()))
-          .map((item) => item as List<dynamic>) // map para garantir o tipo correto
+          .map((item) => item as List<dynamic>)
           .toList();
     }
+  }
+
+  void _filterByCategory(String category) {
+    List<List<dynamic>> filteredItems = cartModel.produtosItens
+        .where((item) => item.length > 5 && item[5] == category)
+        .map((item) => item as List<dynamic>)
+        .toList();
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CategoriaPage(categoria: category, items: filteredItems),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //essa é a view da tela de pesquisa
       appBar: AppBar(
         title: pesquisarClicado
             ? Container(
@@ -77,10 +90,8 @@ class _SearchPageState extends State<SearchPage> {
             onPressed: () {
               setState(() {
                 if (pesquisarClicado) {
-                  // Realizar a pesquisa ao clicar no botão
                   myFiltrosItens();
                 } else {
-                  // Limpar a pesquisa e campo de texto quando o botão de fechar é pressionado
                   _pesquisarController.clear();
                   filtroItens = List<List<dynamic>>.from(cartModel.produtosItens);
                 }
@@ -95,7 +106,7 @@ class _SearchPageState extends State<SearchPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            if (pesquisarClicado) // Mostrar título "Pesquisas" apenas quando a pesquisa estiver aberta
+            if (pesquisarClicado)
               Padding(
                 padding: const EdgeInsets.all(12),
                 child: Align(
@@ -113,10 +124,8 @@ class _SearchPageState extends State<SearchPage> {
                 height: 150,
                 width: 380,
                 decoration: BoxDecoration(
-                  border: Border.all(
-                      color: Colors.black,
-                      width: 1), // Define a cor e a largura da borda
-                  borderRadius: BorderRadius.circular(12), // Adicione um raio para bordas arredondadas, se desejar
+                  border: Border.all(color: Colors.black, width: 1),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: SizedBox(
                   child: ListView.builder(
@@ -149,7 +158,9 @@ class _SearchPageState extends State<SearchPage> {
               child: Column(
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _filterByCategory("Café da manhã");
+                    },
                     icon: Image.asset(
                       'assets/images/cafedamanha.png',
                       width: 286,
@@ -157,7 +168,9 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _filterByCategory("Almoço");
+                    },
                     icon: Image.asset(
                       'assets/images/almoco.png',
                       width: 286,
@@ -165,7 +178,9 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _filterByCategory("Lanches");
+                    },
                     icon: Image.asset(
                       'assets/images/lanches.png',
                       width: 286,
@@ -173,7 +188,9 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _filterByCategory("Janta");
+                    },
                     icon: Image.asset(
                       'assets/images/janta.png',
                       width: 286,
@@ -181,7 +198,9 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _filterByCategory("Bebidas");
+                    },
                     icon: Image.asset(
                       'assets/images/bebidas.png',
                       width: 286,
@@ -189,7 +208,9 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _filterByCategory("Sobremesas");
+                    },
                     icon: Image.asset(
                       'assets/images/sobremesas.png',
                       width: 286,

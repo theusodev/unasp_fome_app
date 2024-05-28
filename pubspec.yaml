@@ -88,6 +88,9 @@ flutter:
     - assets\images\bolinhodetalhes.png
     - assets\images\crossaintdetalhes.png
     - assets\images\sucodetalhes.png
+    - assets\images\sucodemanga.jpg
+    - assets\images\espaguete.png
+    - assets\images\strogonoff.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
