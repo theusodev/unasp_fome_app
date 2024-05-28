@@ -83,7 +83,7 @@ class _InitialPageState extends State<InitialPage> {
                               builder: (context) => ProdutoDetalhesPage(
                                 produtoNome: value.produtosItens[index][0],
                                 produtoPreco: value.produtosItens[index][1],
-                                produtoImagem: value.produtosItens[index][2],
+                                produtoImagem: value.produtosItens[index][4],
                                 produtoDescricao: value.produtosItens[index][3], // Assumindo que a descrição está no índice 3
                               ),
                             ),

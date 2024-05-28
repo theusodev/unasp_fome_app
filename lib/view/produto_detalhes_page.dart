@@ -25,7 +25,10 @@ class ProdutoDetalhesPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(produtoImagem,
+            SizedBox(
+              width: double.infinity,
+              height: 300,
+              child: Image.asset(produtoImagem, fit: BoxFit.cover),
             ),
             SizedBox(height: 16),
             Text(
