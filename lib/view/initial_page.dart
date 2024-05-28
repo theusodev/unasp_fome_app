@@ -1,14 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unasp_fome_app/common/produtos_view.dart';
 import 'package:unasp_fome_app/model/cart_model.dart';
+import 'package:unasp_fome_app/common/produtos_view.dart';
 import 'package:unasp_fome_app/view/produto_detalhes_page.dart';
+//import 'package:unasp_fome_app/views/produto_detalhes_page.dart'; // Certifique-se de importar o arquivo correto
 
 class InitialPage extends StatefulWidget {
   const InitialPage({super.key});
+
   @override
-  State<InitialPage> createState() => _InitialPageState();
+  _InitialPageState createState() => _InitialPageState();
 }
 
 class _InitialPageState extends State<InitialPage> {
@@ -41,7 +42,8 @@ class _InitialPageState extends State<InitialPage> {
               height: kToolbarHeight,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: List.generate(
+                children: 
+                  List.generate(
                     7,
                     (index) => Padding(
                         padding: EdgeInsets.only(right: 10),
@@ -49,6 +51,7 @@ class _InitialPageState extends State<InitialPage> {
                           'assets/images/Google_Login.png',
                           fit: BoxFit.cover,
                         ))),
+                
               ),
             ),
             SizedBox(height: 26),
@@ -61,7 +64,7 @@ class _InitialPageState extends State<InitialPage> {
             ),
             Container(
               height: MediaQuery.of(context).size.height * 0.5,
-              width: MediaQuery.of(context).size.width * 1,
+              width: MediaQuery.of(context).size.width,
               child: Consumer<CartModel>(
                 builder: (context, value, child) {
                   return GridView.builder(
@@ -84,7 +87,8 @@ class _InitialPageState extends State<InitialPage> {
                                 produtoNome: value.produtosItens[index][0],
                                 produtoPreco: value.produtosItens[index][1],
                                 produtoImagem: value.produtosItens[index][4],
-                                produtoDescricao: value.produtosItens[index][3], // Assumindo que a descrição está no índice 3
+                                produtoDescricao: value.produtosItens[index][3],
+                                produtoIndex: index,
                               ),
                             ),
                           );

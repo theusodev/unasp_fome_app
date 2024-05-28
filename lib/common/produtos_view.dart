@@ -69,6 +69,9 @@ class ProdutosPage extends StatelessWidget {
                   SizedBox(
                     height: 25,
                     child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)
+                      ),
                       onPressed: onPressed,
                       color: Colors.orange,
                       child: Text("R\$ " + produtoPreco,

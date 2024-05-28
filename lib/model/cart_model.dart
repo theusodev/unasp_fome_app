@@ -7,11 +7,11 @@ class CartModel extends ChangeNotifier {
   //lista de produtos
   final List produtosItens = [
     // [produtoNome, produtoPreco, produtoImagem]
-    ["Lanche Natural", "6.00", "assets/images/lanchenatural.png","O lanche natual é gostoso demais", "assets/images/lanchenaturaldetalhes.png"],
-    ["Bolinho de Grão de Bico", "7.50", "assets/images/bolinhograodebico.png", "O boliinho é 1000grau", "assets/images/bolinhodetalhes.png"],
-    ["Croassaint", "6.00", "assets/images/croassaint.png", "Croassaint de frango é melhor", "assets/images/crossaintdetalhes.png"],
+    ["Lanche Natural", "6.00", "assets/images/lanchenatural.png","Nosso lanche natural, feito com ingredientes frescos, pão integral, proteínas magras e vegetais crocantes, oferece uma opção saudável e deliciosa para qualquer hora do dia.", "assets/images/lanchenaturaldetalhes.png"],
+    ["Bolinho de Grão de Bico", "7.50", "assets/images/bolinhograodebico.png", "Nosso bolinho de grão de bico é uma opção saborosa e saudável, crocante por fora e macio por dentro, perfeito para qualquer ocasião.", "assets/images/bolinhodetalhes.png"],
+    ["Croassaint", "6.00", "assets/images/croassaint.png", "Nosso croissant é leve, crocante e amanteigado, proporcionando uma experiência deliciosa e autêntica a cada mordida.", "assets/images/crossaintdetalhes.png"],
     ["Suco Natural de Laranja", "4.00", "assets/images/suconatural.png", "Melhor suco do mundo", "assets/images/sucodetalhes.png"],
-    ["Suco Natural de Manga", "4.00", "assets/images/suconatural.png", "Suco de", "assets/images/sucodetalhes.png"],
+    ["Suco Natural de Manga", "4.00", "assets/images/suconatural.png", "Suco de manga é ruim", "assets/images/sucodetalhes.png"],
   ];
 
   //lista de produtos no carrinho
