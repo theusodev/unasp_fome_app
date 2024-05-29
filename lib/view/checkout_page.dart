@@ -26,7 +26,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          title: Text("Pagamento"),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            "Pagamento",
+            style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+          ),
         ),
         body: Consumer<CartModel>(
           builder: (context, value, child) {
@@ -245,19 +250,22 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     Divider(height: 16, color: Colors.black),
                     SizedBox(height: 50),
 
-                    ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.orange,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                    SizedBox(
+                      width: 300,
+                      child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.orange,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
                           ),
-                        ),
-                        child: Text(
-                          "Confirmar pagamento",
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ))
+                          child: Text(
+                            "Confirmar pagamento",
+                            style: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.bold),
+                          )),
+                    )
 
                     //parei a construçã aqui
                     //video referencia: https://www.youtube.com/watch?v=RERkUPqh71Y
