@@ -1,7 +1,4 @@
-import 'dart:js_util';
-
 import 'package:flutter/material.dart';
-
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({super.key});
 
