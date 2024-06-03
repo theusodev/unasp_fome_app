@@ -31,37 +31,39 @@ class _InitialPageState extends State<InitialPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(height: 16),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "Últimos pedidos",
-                    style: TextStyle(color: Colors.black, fontSize: 24),
-                  ),
-                ),
-                SizedBox(height: 26),
-                SizedBox(
-                  height: kToolbarHeight,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: List.generate(
-                      7,
-                      (index) => Padding(
-                        padding: EdgeInsets.only(right: 10),
-                        child: Image.asset(
-                          'assets/images/Google_Login.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 26),
+                //REMOVI A BARRA LATERAL DE ÚLTIMOS PEDIDOS
+
+                // SizedBox(height: 16),
+                // Align(
+                //   alignment: Alignment.topLeft,
+                //   child: Text(
+                //     "Últimos pedidos",
+                //     style: TextStyle(color: Colors.black, fontSize: 24),
+                //   ),
+                // ),
+                // SizedBox(height: 26),
+                // SizedBox(
+                //   height: kToolbarHeight,
+                //   child: ListView(
+                //     scrollDirection: Axis.horizontal,
+                //     children: List.generate(
+                //       7,
+                //       (index) => Padding(
+                //         padding: EdgeInsets.only(right: 10),
+                //         child: Image.asset(
+                //           'assets/images/Google_Login.png',
+                //           fit: BoxFit.cover,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                //SizedBox(height: 26),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     "Sugestões do Cheff",
-                    style: TextStyle(color: Colors.black, fontSize: 24),
+                    style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
