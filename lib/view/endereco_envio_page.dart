@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unasp_fome_app/view/confirmar_pedido_page.dart';
 
 class EnderecoEnvioPage extends StatelessWidget {
   const EnderecoEnvioPage({super.key});
@@ -147,7 +148,13 @@ class EnderecoEnvioPage extends StatelessWidget {
               SizedBox(
                 width: 300,
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ConfirmarPedidoPage()));
+                                  },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange,
                       shape: RoundedRectangleBorder(
