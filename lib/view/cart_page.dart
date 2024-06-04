@@ -103,16 +103,20 @@ class Cartpage extends StatelessWidget {
                         child: Row(
                           children: [
                             ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => CheckoutPage(),
-                                  ),
-                                );
-                              },
+                              onPressed: cartModel.items.isNotEmpty
+                                  ? () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => CheckoutPage(),
+                                        ),
+                                      );
+                                    }
+                                  : null, // Desabilitar se o carrinho estiver vazio
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.grey,
+                                backgroundColor: cartModel.items.isNotEmpty
+                                    ? Colors.orange
+                                    : Colors.grey,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16),
                                   side: BorderSide(color: Colors.black, width: 1),
@@ -120,7 +124,8 @@ class Cartpage extends StatelessWidget {
                               ),
                               child: Text(
                                 "Pagar",
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(color: Colors.black,
+                                fontWeight: FontWeight.bold),
                               ),
                             ),
                           ],
@@ -173,7 +178,8 @@ class HistoricoPedidosPage extends StatelessWidget {
                       subtitle: Text('R\$ ' + item[1]),
                     );
                   }).toList(),
-              ));
+                ),
+              );
             },
           );
         },
