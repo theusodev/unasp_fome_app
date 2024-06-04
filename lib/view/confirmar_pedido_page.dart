@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:unasp_fome_app/model/cart_model.dart';
 import 'package:unasp_fome_app/view/checkout_page.dart';
 import 'package:unasp_fome_app/view/endereco_envio_page.dart';
+import 'package:unasp_fome_app/view/pedido_confirmado_sucesso.dart';
 
 class ConfirmarPedidoPage extends StatelessWidget {
   const ConfirmarPedidoPage({super.key});
@@ -193,7 +194,11 @@ class ConfirmarPedidoPage extends StatelessWidget {
                       width: 300,
                       child: ElevatedButton(
                           onPressed: () {
-                            //função aqui
+                            Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PedidoConfirmadoSucesso()));
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.orange,
