@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unasp_fome_app/model/cart_model.dart';
+import 'package:unasp_fome_app/model/payment_model.dart';
 import 'package:unasp_fome_app/view/checkout_page.dart';
 import 'package:unasp_fome_app/view/endereco_envio_page.dart';
 import 'package:unasp_fome_app/view/pedido_confirmado_sucesso.dart';
 
 class ConfirmarPedidoPage extends StatelessWidget {
-  const ConfirmarPedidoPage({super.key});
+  final String nome;
+  final String telefone;
+  final String endereco;
+  final String cep;
+  final String complemento;
+
+  const ConfirmarPedidoPage({
+    Key? key,
+    required this.nome,
+    required this.telefone,
+    required this.endereco,
+    required this.cep,
+    required this.complemento,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,186 +33,174 @@ class ConfirmarPedidoPage extends StatelessWidget {
           style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
         ),
       ),
-      body: Consumer<CartModel>(
-        builder: (context, value, child) {
+      body: Consumer2<CartModel, PaymentModel>(
+        builder: (context, cartModel, paymentModel, child) {
           return SingleChildScrollView(
             child: SafeArea(
-                child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 15),
-                  Text(
-                    "Endereço de envio",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    width: MediaQuery.of(context).size.width,
-                    height: 110,
-                    decoration: BoxDecoration(
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 15),
+                    Text(
+                      "Endereço de envio",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      width: MediaQuery.of(context).size.width,
+                      height: 110,
+                      decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 4,
-                              spreadRadius: 2)
-                        ]),
-                    child: Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Magnifico Reitor",
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              TextButton(
+                            color: Colors.black12,
+                            blurRadius: 4,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  nome,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                TextButton(
                                   onPressed: () {
                                     Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                EnderecoEnvioPage()));
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => EnderecoEnvioPage()),
+                                    );
                                   },
                                   child: Text(
                                     "Editar",
                                     style: TextStyle(
                                         fontSize: 18, color: Colors.orange),
-                                  ))
-                            ],
-                          ),
-                          Text(
-                            "Rua Alexandre Bening, 290",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Text(
-                            "05736-040",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              endereco,
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Text(
+                              cep,
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            if (complemento.isNotEmpty)
+                              Text(
+                                complemento,
+                                style: TextStyle(fontSize: 16),
+                              ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Forma de pagamento",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      TextButton(
+                    SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Forma de pagamento",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        TextButton(
                           onPressed: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CheckoutPage()));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CheckoutPage()),
+                            );
                           },
                           child: Text(
                             "Editar",
-                            style:
-                                TextStyle(fontSize: 18, color: Colors.orange),
-                          ))
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Container(
-                        height: 50,
-                        width: 80,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 4,
-                                  spreadRadius: 2)
-                            ]),
-                        child: Icon(Icons.credit_card),
-                      ),
-                      SizedBox(width: 20),
-                      Text("**** **** **** 1234")
-                    ],
-                  ),
-
-                  //PARTE DA ENTREGA
-                  SizedBox(height: 15),
-                  Text(
-                    "Entrega",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-
-                  SizedBox(height: 10),
-
-                  Container(
-                      height: 60,
-                      width: 100,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 4,
-                                spreadRadius: 2)
-                          ]),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Icon(Icons.delivery_dining_outlined),
-                          Text(
-                            "10-15 Minutos",
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
-                          )
-                        ],
-                      )),
-                  SizedBox(
-                    height: 100,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Total: ",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.grey),
-                      ),
-                      Text(
-                        "R\$ " + value.calcularTotal(),
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  Divider(height: 16, color: Colors.black),
-                  SizedBox(height: 50),
-
-                  Center(
-                    child: SizedBox(
-                      width: 300,
-                      child: ElevatedButton(
+                            style: TextStyle(fontSize: 18, color: Colors.orange),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Container(
+                          height: 55,
+                          width: 55,
+                          decoration: BoxDecoration(
+                              color: Colors.orange[50],
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Icon(
+                            paymentModel.selectedPaymentIcon,
+                            color: Colors.orange,
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          paymentModel.selectedPaymentMethod,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 30),
+                    Divider(height: 40),
+                    Text(
+                      "Resumo do Pedido",
+                      style: TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 10),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: cartModel.items.length, // Corrigido aqui
+                      itemBuilder: (context, index) {
+                        final item = cartModel.items[index]; // Corrigido aqui
+                        return ListTile(
+                          leading: Image.asset(item[2]),
+                          title: Text(item[0]),
+                          subtitle: Text('Qtd: 1'),
+                          trailing: Text('R\$ ${item[1]}'),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Total:",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "R\$ ${cartModel.calcularTotal()}",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 50),
+                    Center(
+                      child: SizedBox(
+                        width: 300,
+                        child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                PedidoConfirmadoSucesso()));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PedidoConfirmadoSucesso()),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.orange,
@@ -211,12 +213,14 @@ class ConfirmarPedidoPage extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
-                          )),
+                          ),
+                        ),
+                      ),
                     ),
-                  )
-                ],
+                  ],
+                ),
               ),
-            )),
+            ),
           );
         },
       ),

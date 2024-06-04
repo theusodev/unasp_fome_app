@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unasp_fome_app/model/cart_model.dart';
+import 'package:unasp_fome_app/model/payment_model.dart';
 import 'package:unasp_fome_app/view/endereco_envio_page.dart';
 
 class CheckoutPage extends StatefulWidget {
@@ -13,9 +14,26 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   int _type = 1;
 
-  void _handleRadio(Object? e) => setState(() {
-        _type = e as int;
-      });
+  void _handleRadio(Object? e) {
+    setState(() {
+      _type = e as int;
+    });
+    final paymentModel = Provider.of<PaymentModel>(context, listen: false);
+    switch (_type) {
+      case 1:
+        paymentModel.setPaymentMethod('Débito', Icons.credit_card);
+        break;
+      case 2:
+        paymentModel.setPaymentMethod('Crédito', Icons.credit_card);
+        break;
+      case 3:
+        paymentModel.setPaymentMethod('Dinheiro', Icons.money);
+        break;
+      case 4:
+        paymentModel.setPaymentMethod('Pix', Icons.qr_code);
+        break;
+    }
+  }
 
   @override
   void initState() {
@@ -26,210 +44,56 @@ class _CheckoutPageState extends State<CheckoutPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Text(
-            "Pagamento",
-            style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-          ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          "Pagamento",
+          style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
         ),
-        body: Consumer<CartModel>(
-          builder: (context, value, child) {
-            return SingleChildScrollView(
-              child: SafeArea(
-                  child: Padding(
+      ),
+      body: Consumer<CartModel>(
+        builder: (context, value, child) {
+          return SingleChildScrollView(
+            child: SafeArea(
+              child: Padding(
                 padding: EdgeInsets.all(20),
                 child: Center(
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: 40,
+                      SizedBox(height: 40),
+                      _buildPaymentOption(
+                        context,
+                        size,
+                        "Débito",
+                        Icons.credit_card,
+                        1,
                       ),
-                      Container(
-                        width: size.width,
-                        height: 55,
-                        //margin: EdgeInsets.only(right: 20),
-                        decoration: BoxDecoration(
-                            border: _type == 1
-                                ? Border.all(width: 1, color: Colors.orange)
-                                : Border.all(width: 0.3, color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.transparent),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Radio(
-                                    value: 1,
-                                    groupValue: _type,
-                                    onChanged: _handleRadio,
-                                    activeColor: Colors.orange,
-                                  ),
-                                  Text("Débito",
-                                      style: _type == 1
-                                          ? TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.black)
-                                          : TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.grey)),
-                                ],
-                              ),
-                              Icon(Icons.credit_card)
-                            ],
-                          ),
-                        ),
+                      SizedBox(height: 15),
+                      _buildPaymentOption(
+                        context,
+                        size,
+                        "Crédito",
+                        Icons.credit_card,
+                        2,
                       ),
-              
-                      SizedBox(
-                        height: 15,
+                      SizedBox(height: 15),
+                      _buildPaymentOption(
+                        context,
+                        size,
+                        "Dinheiro",
+                        Icons.money,
+                        3,
                       ),
-                      Container(
-                        width: size.width,
-                        height: 55,
-                        //margin: EdgeInsets.only(right: 20),
-                        decoration: BoxDecoration(
-                            border: _type == 2
-                                ? Border.all(width: 1, color: Colors.orange)
-                                : Border.all(width: 0.3, color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.transparent),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Radio(
-                                    value: 2,
-                                    groupValue: _type,
-                                    onChanged: _handleRadio,
-                                    activeColor: Colors.orange,
-                                  ),
-                                  Text("Crédito",
-                                      style: _type == 2
-                                          ? TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.black)
-                                          : TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.grey)),
-                                ],
-                              ),
-                              Icon(Icons.credit_card)
-                            ],
-                          ),
-                        ),
+                      SizedBox(height: 15),
+                      _buildPaymentOption(
+                        context,
+                        size,
+                        "Pix",
+                        Icons.qr_code,
+                        4,
                       ),
-              
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        width: size.width,
-                        height: 55,
-                        //margin: EdgeInsets.only(right: 20),
-                        decoration: BoxDecoration(
-                            border: _type == 3
-                                ? Border.all(width: 1, color: Colors.orange)
-                                : Border.all(width: 0.3, color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.transparent),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Radio(
-                                    value: 3,
-                                    groupValue: _type,
-                                    onChanged: _handleRadio,
-                                    activeColor: Colors.orange,
-                                  ),
-                                  Text("Dinheiro",
-                                      style: _type == 3
-                                          ? TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.black)
-                                          : TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.grey)),
-                                ],
-                              ),
-                              Icon(Icons.money)
-                            ],
-                          ),
-                        ),
-                      ),
-              
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        width: size.width,
-                        height: 55,
-                        //margin: EdgeInsets.only(right: 20),
-                        decoration: BoxDecoration(
-                            border: _type == 4
-                                ? Border.all(width: 1, color: Colors.orange)
-                                : Border.all(width: 0.3, color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.transparent),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Radio(
-                                    value: 4,
-                                    groupValue: _type,
-                                    onChanged: _handleRadio,
-                                    activeColor: Colors.orange,
-                                  ),
-                                  Text("Pix",
-                                      style: _type == 4
-                                          ? TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.black)
-                                          : TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.grey)),
-                                ],
-                              ),
-                              Icon(Icons.qr_code)
-                            ],
-                          ),
-                        ),
-                      ),
-              
-                      SizedBox(
-                        height: 100,
-                      ),
+                      SizedBox(height: 100),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -251,38 +115,83 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ),
                       Divider(height: 16, color: Colors.black),
                       SizedBox(height: 50),
-              
                       SizedBox(
                         width: 300,
                         child: ElevatedButton(
-                            onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                EnderecoEnvioPage()));
-                                  },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.orange,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EnderecoEnvioPage()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.orange,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
                             ),
-                            child: Text(
-                              "Confirmar pagamento",
-                              style: TextStyle(
-                                  color: Colors.white, fontWeight: FontWeight.bold),
-                            )),
-                      )
-              
-                      //parei a construçã aqui
-                      //video referencia: https://www.youtube.com/watch?v=RERkUPqh71Y
+                          ),
+                          child: Text(
+                            "Confirmar pagamento",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              )),
-            );
-          },
-        ));
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildPaymentOption(
+      BuildContext context, Size size, String text, IconData icon, int value) {
+    return Container(
+      width: size.width,
+      height: 55,
+      decoration: BoxDecoration(
+          border: _type == value
+              ? Border.all(width: 1, color: Colors.orange)
+              : Border.all(width: 0.3, color: Colors.grey),
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.transparent),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 20),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Radio(
+                  value: value,
+                  groupValue: _type,
+                  onChanged: _handleRadio,
+                  activeColor: Colors.orange,
+                ),
+                Text(text,
+                    style: _type == value
+                        ? TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black)
+                        : TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey)),
+              ],
+            ),
+            Icon(icon)
+          ],
+        ),
+      ),
+    );
   }
 }

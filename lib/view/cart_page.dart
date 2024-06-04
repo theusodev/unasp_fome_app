@@ -9,119 +9,118 @@ class Cartpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //essa é a tela de carrinho
-        //nome "meu carrinho" no topo da tela
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Text(
-            "Meu carrinho",
-            style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-          ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          "Meu carrinho",
+          style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
         ),
+      ),
+      body: Consumer<CartModel>(
+        builder: (context, cartModel, child) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Lista de itens do carrinho
+              Expanded(
+                child: ListView.builder(
+                  itemCount: cartModel.items.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: Colors.black, width: 1),
+                        ),
+                        child: ListTile(
+                          leading: Image.asset(
+                            cartModel.items[index][2],
+                            height: 36,
+                          ),
+                          title: Text(cartModel.items[index][0]),
+                          subtitle: Text('R\$ ' + cartModel.items[index][1]),
+                          trailing: IconButton(
+                            icon: Icon(Icons.cancel),
+                            onPressed: () => cartModel.removeItens(index),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
 
-        //consumindo a classe do CartModel onde armazena os itens de carrinho
-        body: Consumer<CartModel>(
-          builder: (context, value, child) {
-            //aqui inicia a lista de produtos quando adicionados
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //lista de itens do carrinho
-                Expanded(
-                    child: ListView.builder(
-                        itemCount: value.itensCart.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.grey[200],
+              // Botão cinza de valor total no final da tela
+              Padding(
+                padding: const EdgeInsets.all(36.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: EdgeInsets.all(24),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Preço
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Valor total",
+                            style: TextStyle(color: Colors.black, fontSize: 14),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            "R\$ " + cartModel.calcularTotal(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      Container(
+                        padding: EdgeInsets.all(12),
+                        child: Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => CheckoutPage(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.grey,
+                                shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16),
-                                  border: Border.all(
-                                      color: Colors.black, width: 1)),
-                              child: ListTile(
-                                leading: Image.asset(
-                                  value.itensCart[index][2],
-                                  height: 36,
+                                  side: BorderSide(color: Colors.black, width: 1),
                                 ),
-                                title: Text(value.itensCart[index][0]),
-                                subtitle:
-                                    Text('R\$ ' + value.itensCart[index][1]),
-                                trailing: IconButton(
-                                    icon: Icon(Icons.cancel),
-                                    onPressed: () => Provider.of<CartModel>(
-                                            context,
-                                            listen: false)
-                                        .removeItens(index)),
+                              ),
+                              child: Text(
+                                "Pagar",
+                                style: TextStyle(color: Colors.black),
                               ),
                             ),
-                          );
-                        })),
-
-                //botão cinza de valor total no final da tela
-                Padding(
-                  padding: const EdgeInsets.all(36.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(8)),
-                    padding: EdgeInsets.all(24),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //preço
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Valor total",
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 14)),
-                            SizedBox(height: 4),
-                            Text(
-                              "R\$ " + value.calcularTotal(),
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            )
                           ],
                         ),
-
-                        Container(
-                          padding: EdgeInsets.all(12),
-                          child: Row(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              CheckoutPage()));
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.grey,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16),
-                                  side: BorderSide(
-                                    color: Colors.black, width: 1
-                                  )),
-                                ),
-                                child: Text(
-                                  "Pagar",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                )
-              ],
-            );
-          },
-        ));
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
   }
 }
