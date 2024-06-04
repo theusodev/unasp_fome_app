@@ -16,8 +16,14 @@ class CartModel extends ChangeNotifier {
   // Lista de produtos no carrinho
   List<List<dynamic>> _itensCart = [];
 
+  // Lista de pedidos feitos
+  List<List<List<dynamic>>> _historicoPedidos = [];
+
   // Getter para itens no carrinho
   List<List<dynamic>> get items => _itensCart;
+
+  // Getter para histórico de pedidos
+  List<List<List<dynamic>>> get historicoPedidos => _historicoPedidos;
 
   // Adicionar no carrinho
   void addItem(List<dynamic> item) {
@@ -38,5 +44,18 @@ class CartModel extends ChangeNotifier {
       precoTotal += double.parse(_itensCart[i][1]);
     }
     return precoTotal.toStringAsFixed(2);
+  }
+
+  // Confirmar pedido e adicionar ao histórico
+  void confirmarPedido() {
+    _historicoPedidos.add(List.from(_itensCart));
+    _itensCart.clear();
+    notifyListeners();
+  }
+
+  // Repetir pedido
+  void refazerPedido(List<List<dynamic>> pedido) {
+    _itensCart = List.from(pedido);
+    notifyListeners();
   }
 }

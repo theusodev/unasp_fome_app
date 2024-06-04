@@ -16,6 +16,19 @@ class Cartpage extends StatelessWidget {
           "Meu carrinho",
           style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.history),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HistoricoPedidosPage(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Consumer<CartModel>(
         builder: (context, cartModel, child) {
@@ -118,6 +131,50 @@ class Cartpage extends StatelessWidget {
                 ),
               ),
             ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class HistoricoPedidosPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Histórico de Pedidos"),
+      ),
+      body: Consumer<CartModel>(
+        builder: (context, cartModel, child) {
+          return ListView.builder(
+            itemCount: cartModel.historicoPedidos.length,
+            itemBuilder: (context, index) {
+              var pedido = cartModel.historicoPedidos[index];
+              return GestureDetector(
+                onTap: () {
+                  cartModel.refazerPedido(pedido);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Cartpage(),
+                    ),
+                  );
+                },
+                child: ExpansionTile(
+                  title: Text("Pedido ${index + 1}"),
+                  children: pedido.map<Widget>((item) {
+                    return ListTile(
+                      leading: Image.asset(
+                        item[2],
+                        height: 36,
+                      ),
+                      title: Text(item[0]),
+                      subtitle: Text('R\$ ' + item[1]),
+                    );
+                  }).toList(),
+              ));
+            },
           );
         },
       ),

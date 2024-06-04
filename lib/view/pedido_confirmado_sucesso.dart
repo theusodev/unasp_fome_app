@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:unasp_fome_app/model/cart_model.dart';
 import 'package:unasp_fome_app/view/home_page.dart';
-import 'package:unasp_fome_app/view/initial_page.dart';
 
 class PedidoConfirmadoSucesso extends StatelessWidget {
   const PedidoConfirmadoSucesso({super.key});
@@ -36,6 +37,7 @@ class PedidoConfirmadoSucesso extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: ElevatedButton(
               onPressed: () {
+                Provider.of<CartModel>(context, listen: false).confirmarPedido();
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => Homepage()),
