@@ -162,14 +162,15 @@ class ConfirmarPedidoPage extends StatelessWidget {
                     SizedBox(height: 10),
                     ListView.builder(
                       shrinkWrap: true,
-                      itemCount: cartModel.items.length, // Corrigido aqui
+                      itemCount: cartModel.items.length,
                       itemBuilder: (context, index) {
-                        final item = cartModel.items[index]; // Corrigido aqui
+                        final item = cartModel.items.keys.elementAt(index);
+                        final quantidade = cartModel.items[item];
                         return ListTile(
                           leading: Image.asset(item[2]),
                           title: Text(item[0]),
-                          subtitle: Text('Qtd: 1'),
-                          trailing: Text('R\$ ${item[1]}'),
+                          subtitle: Text('Qtd: $quantidade'),
+                          trailing: Text('R\$ ${double.parse(item[1]) * quantidade!}'),
                         );
                       },
                     ),
@@ -195,6 +196,7 @@ class ConfirmarPedidoPage extends StatelessWidget {
                         width: 300,
                         child: ElevatedButton(
                           onPressed: () {
+                            cartModel.confirmarPedido();
                             Navigator.push(
                               context,
                               MaterialPageRoute(

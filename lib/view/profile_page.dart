@@ -26,11 +26,12 @@ class Profilepage extends StatelessWidget {
               onTap: () async {
                 await AutenticacaoService().deslogar();
                 await GoogleSignIn().signOut();
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()), // Redireciona para a página de login
-                  (Route<dynamic> route) => false,
-                );
+                // redirecionamento de tela de volta para o login
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => LoginPage()), // Redireciona para a página de login
+                //   (Route<dynamic> route) => false,
+                // );
               },
             ),
           ],

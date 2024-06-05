@@ -40,7 +40,7 @@ class _HomepageState extends State<Homepage> {
         children: [
           InitialPage(),
           SearchPage(),
-          Cartpage(),
+          CartPage(),
           Profilepage()
         ],
         onPageChanged: setPaginaAtual,

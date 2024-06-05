@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:unasp_fome_app/model/cart_model.dart';
 import 'package:unasp_fome_app/view/checkout_page.dart';
 
-class Cartpage extends StatelessWidget {
-  const Cartpage({super.key});
+class CartPage extends StatelessWidget {
+  const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +40,8 @@ class Cartpage extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: cartModel.items.length,
                   itemBuilder: (context, index) {
+                    var item = cartModel.items.keys.elementAt(index);
+                    var quantidade = cartModel.items[item];
                     return Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Container(
@@ -50,14 +52,28 @@ class Cartpage extends StatelessWidget {
                         ),
                         child: ListTile(
                           leading: Image.asset(
-                            cartModel.items[index][2],
+                            item[2],
                             height: 36,
                           ),
-                          title: Text(cartModel.items[index][0]),
-                          subtitle: Text('R\$ ' + cartModel.items[index][1]),
-                          trailing: IconButton(
-                            icon: Icon(Icons.cancel),
-                            onPressed: () => cartModel.removeItens(index),
+                          title: Text(item[0]),
+                          subtitle: Text('R\$ ${item[1]}'),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.remove),
+                                onPressed: () => cartModel.removeItem(item),
+                              ),
+                              Text('$quantidade'),
+                              IconButton(
+                                icon: Icon(Icons.add),
+                                onPressed: () => cartModel.addItem(item),
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.cancel),
+                                onPressed: () => cartModel.removeItem(item),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -88,7 +104,7 @@ class Cartpage extends StatelessWidget {
                           ),
                           SizedBox(height: 4),
                           Text(
-                            "R\$ " + cartModel.calcularTotal(),
+                            "R\$ ${cartModel.calcularTotal()}",
                             style: const TextStyle(
                               color: Colors.black,
                               fontSize: 18,
@@ -156,26 +172,30 @@ class HistoricoPedidosPage extends StatelessWidget {
             itemCount: cartModel.historicoPedidos.length,
             itemBuilder: (context, index) {
               var pedido = cartModel.historicoPedidos[index];
+              var precoTotal = cartModel.calcularTotalPedido(pedido);
               return GestureDetector(
                 onTap: () {
                   cartModel.refazerPedido(pedido);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Cartpage(),
+                      builder: (context) => CartPage(),
                     ),
                   );
                 },
                 child: ExpansionTile(
-                  title: Text("Pedido ${index + 1}"),
-                  children: pedido.map<Widget>((item) {
+                  title: Text("Pedido ${index + 1} - Total: R\$ $precoTotal"),
+                  children: pedido.entries.map<Widget>((entry) {
+                    var item = entry.key;
+                    var quantidade = entry.value;
                     return ListTile(
                       leading: Image.asset(
                         item[2],
                         height: 36,
                       ),
                       title: Text(item[0]),
-                      subtitle: Text('R\$ ' + item[1]),
+                      subtitle: Text('R\$ ${item[1]}'),
+                      trailing: Text('Qtd: $quantidade'),
                     );
                   }).toList(),
                 ),

@@ -13,49 +13,78 @@ class CartModel extends ChangeNotifier {
     ["Strogonoff Vegetariano", "25.00", "assets/images/strogonoff.png", "Strogonoff de frango de verdade é bem melhor", "assets/images/strogonoff.png", "Almoço"],
   ];
 
-  // Lista de produtos no carrinho
-  List<List<dynamic>> _itensCart = [];
+  // Lista de produtos no carrinho e suas quantidades
+  Map<List<dynamic>, int> _itensCart = {};
 
   // Lista de pedidos feitos
-  List<List<List<dynamic>>> _historicoPedidos = [];
+  List<Map<List<dynamic>, int>> _historicoPedidos = [];
 
   // Getter para itens no carrinho
-  List<List<dynamic>> get items => _itensCart;
+  Map<List<dynamic>, int> get items => _itensCart;
 
   // Getter para histórico de pedidos
-  List<List<List<dynamic>>> get historicoPedidos => _historicoPedidos;
+  List<Map<List<dynamic>, int>> get historicoPedidos => _historicoPedidos;
 
   // Adicionar no carrinho
   void addItem(List<dynamic> item) {
-    _itensCart.add(item);
+    if (_itensCart.containsKey(item)) {
+      _itensCart[item] = _itensCart[item]! + 1;
+    } else {
+      _itensCart[item] = 1;
+    }
     notifyListeners();
   }
 
   // Remover do carrinho
-  void removeItens(int index) {
-    _itensCart.removeAt(index);
+  void removeItem(List<dynamic> item) {
+    if (_itensCart.containsKey(item) && _itensCart[item]! > 1) {
+      _itensCart[item] = _itensCart[item]! - 1;
+    } else {
+      _itensCart.remove(item);
+    }
     notifyListeners();
   }
 
-  // Calcular preço total
+  // Calcular preço total do carrinho
   String calcularTotal() {
     double precoTotal = 0;
-    for (int i = 0; i < _itensCart.length; i++) {
-      precoTotal += double.parse(_itensCart[i][1]);
-    }
+    _itensCart.forEach((item, quantidade) {
+      precoTotal += double.parse(item[1]) * quantidade;
+    });
+    return precoTotal.toStringAsFixed(2);
+  }
+
+  // Calcular preço total de um pedido específico
+  String calcularTotalPedido(Map<List<dynamic>, int> pedido) {
+    double precoTotal = 0;
+    pedido.forEach((item, quantidade) {
+      precoTotal += double.parse(item[1]) * quantidade;
+    });
     return precoTotal.toStringAsFixed(2);
   }
 
   // Confirmar pedido e adicionar ao histórico
   void confirmarPedido() {
-    _historicoPedidos.add(List.from(_itensCart));
-    _itensCart.clear();
-    notifyListeners();
+    if (_itensCart.isNotEmpty) {
+      _historicoPedidos.add(Map.from(_itensCart));
+      _itensCart.clear();
+      notifyListeners();
+    }
   }
 
   // Repetir pedido
-  void refazerPedido(List<List<dynamic>> pedido) {
-    _itensCart = List.from(pedido);
+  void refazerPedido(Map<List<dynamic>, int> pedido) {
+    _itensCart = Map.from(pedido);
     notifyListeners();
+  }
+
+  // Obter quantidade de um item
+  int getQuantidade(String itemNome) {
+    for (var item in _itensCart.keys) {
+      if (item[0] == itemNome) {
+        return _itensCart[item]!;
+      }
+    }
+    return 0;
   }
 }
