@@ -29,28 +29,12 @@ class _LoginPageState extends State<LoginPage> {
 
   // Função para validar a senha
   String? validatePassword(String value) {
-    // Verifica se a senha tem pelo menos 8 caracteres
     if (value.length < 8) {
       return 'A senha deve ter pelo menos 8 caracteres';
     }
-    // Verifica se a senha contém letras maiúsculas
-    if (!value.contains(RegExp(r'[A-Z]'))) {
-      return 'A senha deve conter pelo menos uma letra maiúscula';
-    }
-    // Verifica se a senha contém letras minúsculas
-    if (!value.contains(RegExp(r'[a-z]'))) {
-      return 'A senha deve conter pelo menos uma letra minúscula';
-    }
-    // Verifica se a senha contém números
-    if (!value.contains(RegExp(r'[0-9]'))) {
-      return 'A senha deve conter pelo menos um número';
-    }
-    // Verifica se a senha contém caracteres especiais
-    if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-      return 'A senha deve conter pelo menos um caractere especial';
-    }
     return null; // Senha válida
   }
+
 
   @override
   Widget build(BuildContext context) {
