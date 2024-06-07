@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unasp_fome_app/model/cart_model.dart';
+import 'package:unasp_fome_app/view/cart_page.dart';
 
 class ProdutoDetalhesPage extends StatefulWidget {
   final String produtoNome;
@@ -104,12 +105,19 @@ class _ProdutoDetalhesPageState extends State<ProdutoDetalhesPage> {
                   color: Colors.orange,
                   textColor: Colors.white,
                   onPressed: () {
-                    cart.addItem(widget.produtoItem);
-                    setState(() {
-                      _quantidade = cart.getQuantidade(widget.produtoNome);
-                    });
+                    //Lógica de adicionar no carinho
+                    // cart.addItem(widget.produtoItem);
+                    // setState(() {
+                    //   _quantidade = cart.getQuantidade(widget.produtoNome);
+                    // });
+                    Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      CartPage()),
+                            );
                   },
-                  child: Text("Adicionar ao Carrinho"),
+                  child: Text("Ir para Carrinho"),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)),
                 ),
