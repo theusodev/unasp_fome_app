@@ -91,6 +91,10 @@ flutter:
     - assets\images\sucodemanga.jpg
     - assets\images\espaguete.png
     - assets\images\strogonoff.png
+    - assets\images\nhoque.jpeg
+    - assets\images\pudim.jpeg
+    - assets\images\risoto.jpeg
+    - assets\images\tiramisu.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

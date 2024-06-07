@@ -11,6 +11,13 @@ class CartModel extends ChangeNotifier {
     ["Suco Natural de Manga", "4.00", "assets/images/sucodemanga.jpg", "Suco de manga é ruim", "assets/images/sucodemanga.jpg", "Bebidas"],
     ["Espaguete a Bolonhesa", "30.00", "assets/images/espaguete.png", "Espaguete a Bolonhesa, macarrão com carne é bom", "assets/images/espaguete.png", "Almoço"],
     ["Strogonoff Vegetariano", "25.00", "assets/images/strogonoff.png", "Strogonoff de frango de verdade é bem melhor", "assets/images/strogonoff.png", "Almoço"],
+    ["Nhoque", "30.00", "assets/images/nhoque.jpeg", "Um incrível nhoque ao suculento molho pomodoro. Massa fresca.", "assets/images/nhoque.jpeg", "Janta"],
+    ["Risoto", "35.00", "assets/images/risoto.jpeg", "Risoto cremoso de alho-poró e queijos finos.", "assets/images/risoto.jpeg", "Janta"],
+    ["Pudim", "10.00", "assets/images/pudim.jpeg", "Pudim cremoso para adoçar a sua vida.", "assets/images/pudim.jpeg", "Sobremesas"],
+    ["Tiramisu", "15.00", "assets/images/tiramisu.jpeg", "Um sofisticado doce italiano a base de café", "assets/images/tiramisu.jpeg", "Sobremesas"],
+
+
+
   ];
 
   // Lista de produtos no carrinho e suas quantidades
