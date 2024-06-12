@@ -32,7 +32,12 @@ class EsqueciminhasenhaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Esqueci minha senha"),
+        title: Text(
+          'Esqueci minha senha',
+          style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
       ),
 
       body: Padding(
@@ -57,7 +62,10 @@ class EsqueciminhasenhaPage extends StatelessWidget {
             SizedBox(height: 16),
 
             ElevatedButton(onPressed: () => _resetPassword(context), 
-            child: Text("Reenviar senha"),
+            child: Text("Reenviar senha",
+            style: TextStyle(color: Colors.white),),
+            style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange),
             ),
 
           ],
