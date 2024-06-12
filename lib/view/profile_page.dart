@@ -4,8 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:unasp_fome_app/providers/user_provider.dart';
 import 'package:unasp_fome_app/services/autenticacao_service.dart';
 import 'package:unasp_fome_app/view/historico_pedidos_page.dart';
+import 'package:unasp_fome_app/view/login_page.dart';
 
 class ProfilePage extends StatelessWidget {
+ 
   // Custom input decoration
   InputDecoration inputDecoration(String label) {
     return InputDecoration(
@@ -38,14 +40,20 @@ class ProfilePage extends StatelessWidget {
               leading: Icon(Icons.logout),
               title: Text("Deslogar"),
               onTap: () async {
-                await AutenticacaoService().deslogar();
-                await GoogleSignIn().signOut();
-                // redirecionamento de tela de volta para o login
-                // Navigator.pushAndRemoveUntil(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => LoginPage()), // Redireciona para a página de login
-                //   (Route<dynamic> route) => false,
-                // );
+                try {
+                  await AutenticacaoService().deslogar();
+                  await GoogleSignIn().signOut();
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginPage()));
+                  // Redirecionamento de tela de volta para o login
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => LoginPage()), // Redireciona para a página de login
+                  //   (Route<dynamic> route) => false,
+                  // );
+                } catch (e) {
+                  print("Erro ao deslogar: $e");
+                }
               },
             ),
             ListTile(
@@ -53,12 +61,13 @@ class ProfilePage extends StatelessWidget {
               title: Text("Histórico de pedidos"),
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HistoricoPedidosPage(),
-                    ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HistoricoPedidosPage(),
+                  ),
+                );
               },
-            )
+            ),
           ],
         ),
       ),

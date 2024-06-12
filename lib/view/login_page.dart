@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:unasp_fome_app/common/meu_snackbar.dart';
 import 'package:unasp_fome_app/services/autenticacao_service.dart';
 import 'package:unasp_fome_app/providers/user_provider.dart';
+import 'package:unasp_fome_app/view/esqueciminhasenha_page.dart';
 import 'package:unasp_fome_app/view/home_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 SizedBox(height: 16.0),
-                
+
                 // campo de senha
                 TextFormField(
                   controller: _senhaController,
@@ -120,7 +121,6 @@ class _LoginPageState extends State<LoginPage> {
                   visible: !queroEntrar,
                   child: Column(
                     children: [
-
                       // campo de nome
                       TextFormField(
                         controller: _nomeController,
@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
 
                       SizedBox(height: 16),
-                      
+
                       // campo data de nascimento
                       TextFormField(
                         keyboardType: TextInputType.number,
@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
 
                       SizedBox(height: 16),
-                      
+
                       // campo de cpf
                       TextFormField(
                         keyboardType: TextInputType.number,
@@ -150,9 +150,9 @@ class _LoginPageState extends State<LoginPage> {
                         validator:
                             RequiredValidator(errorText: 'CPF é obrigatório'),
                       ),
-                      
+
                       SizedBox(height: 16),
-                      
+
                       // campo de telefone
                       TextFormField(
                         keyboardType: TextInputType.number,
@@ -163,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
 
                       SizedBox(height: 16),
-                      
+
                       //campo de endereço
                       TextFormField(
                         controller: _enderecoController,
@@ -173,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
 
                       SizedBox(height: 16),
-                      
+
                       // campo de cep
                       TextFormField(
                         keyboardType: TextInputType.number,
@@ -183,28 +183,45 @@ class _LoginPageState extends State<LoginPage> {
                             RequiredValidator(errorText: 'CEP é obrigatório'),
                       ),
                       SizedBox(height: 16),
-                      
+
                       // campo de complemento
                       TextFormField(
                         controller: _complementoController,
                         decoration: inputDecoration('Complemento'),
                       ),
-                      
+
                       SizedBox(height: 16),
-                      
                     ],
                   ),
                 ),
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        queroEntrar = !queroEntrar;
-                      });
-                    },
-                    child: Text((queroEntrar)
-                        ? "Não tem uma conta ainda? Cadastre-se já!"
-                        : "Já tem uma conta? Entre já!")),
-                SizedBox(height: 10.0),
+                SizedBox(
+                  height: 45,
+                  child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          queroEntrar = !queroEntrar;
+                        });
+                      },
+                      child: Text((queroEntrar)
+                          ? "Não tem uma conta ainda? Cadastre-se já!"
+                          : "Já tem uma conta? Entre já!")),
+                ),
+
+                //SizedBox(height: 2.0),
+
+                SizedBox(
+                    height: 45,
+                    child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EsqueciminhasenhaPage()
+                          ),
+                        );
+                        }, 
+                        child: Text("Esqueci minha senha"))),
+
                 MaterialButton(
                   height: 41.0,
                   minWidth: 171.0,
