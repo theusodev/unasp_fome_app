@@ -70,16 +70,19 @@ class _LoginPageState extends State<LoginPage> {
                     height: 250,
                   ),
                 ),
+
+                //campo de email
                 TextFormField(
                   controller: _emailController,
-                  decoration: InputDecoration(
-                      labelText: 'E-mail',
-                      errorStyle: TextStyle(fontSize: 18.0),
-                      errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100.0),
-                          borderSide: BorderSide(color: Colors.red, width: 2)),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100.0))),
+                  decoration: inputDecoration('E-mail'),
+                  // decoration: InputDecoration(
+                  //     labelText: 'E-mail',
+                  //     errorStyle: TextStyle(fontSize: 18.0),
+                  //     errorBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(100.0),
+                  //         borderSide: BorderSide(color: Colors.red, width: 2)),
+                  //     border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(100.0))),
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Insira um e-mail";
@@ -91,72 +94,104 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                 ),
+
                 SizedBox(height: 16.0),
+                
+                // campo de senha
                 TextFormField(
                   controller: _senhaController,
-                  decoration: InputDecoration(
-                      labelText: 'Senha',
-                      errorStyle: TextStyle(fontSize: 18.0),
-                      errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100.0),
-                          borderSide: BorderSide(color: Colors.red, width: 2)),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100.0))),
+                  decoration: inputDecoration('Senha'),
+                  // decoration: InputDecoration(
+                  //     labelText: 'Senha',
+                  //     errorStyle: TextStyle(fontSize: 18.0),
+                  //     errorBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(100.0),
+                  //         borderSide: BorderSide(color: Colors.red, width: 2)),
+                  //     border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(100.0))),
                   validator: (value) => validatePassword(value!),
                   obscureText: true,
                 ),
+
                 SizedBox(height: 16.0),
+
+                //CAMPOS DE REGISTRO
                 Visibility(
                   visible: !queroEntrar,
                   child: Column(
                     children: [
+
+                      // campo de nome
                       TextFormField(
                         controller: _nomeController,
                         decoration: inputDecoration('Nome'),
                         validator:
                             RequiredValidator(errorText: 'Nome é obrigatório'),
                       ),
+
                       SizedBox(height: 16),
+                      
+                      // campo data de nascimento
                       TextFormField(
+                        keyboardType: TextInputType.number,
                         controller: _nascimentoController,
                         decoration: inputDecoration('Data de Nascimento'),
                         validator: RequiredValidator(
                             errorText: 'Data de Nascimento é obrigatória'),
                       ),
+
                       SizedBox(height: 16),
+                      
+                      // campo de cpf
                       TextFormField(
+                        keyboardType: TextInputType.number,
                         controller: _cpfController,
                         decoration: inputDecoration('CPF'),
                         validator:
                             RequiredValidator(errorText: 'CPF é obrigatório'),
                       ),
+                      
                       SizedBox(height: 16),
+                      
+                      // campo de telefone
                       TextFormField(
+                        keyboardType: TextInputType.number,
                         controller: _telefoneController,
                         decoration: inputDecoration('Telefone'),
                         validator: RequiredValidator(
                             errorText: 'Telefone é obrigatório'),
                       ),
+
                       SizedBox(height: 16),
+                      
+                      //campo de endereço
                       TextFormField(
                         controller: _enderecoController,
                         decoration: inputDecoration('Endereço'),
                         validator: RequiredValidator(
                             errorText: 'Endereço é obrigatório'),
                       ),
+
                       SizedBox(height: 16),
+                      
+                      // campo de cep
                       TextFormField(
-                        controller: _complementoController,
-                        decoration: inputDecoration('Complemento'),
-                      ),
-                      SizedBox(height: 16),
-                      TextFormField(
+                        keyboardType: TextInputType.number,
                         controller: _cepController,
                         decoration: inputDecoration('CEP'),
                         validator:
                             RequiredValidator(errorText: 'CEP é obrigatório'),
                       ),
                       SizedBox(height: 16),
+                      
+                      // campo de complemento
+                      TextFormField(
+                        controller: _complementoController,
+                        decoration: inputDecoration('Complemento'),
+                      ),
+                      
+                      SizedBox(height: 16),
+                      
                     ],
                   ),
                 ),

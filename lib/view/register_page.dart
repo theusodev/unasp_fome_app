@@ -67,6 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                
                 //ICONE
                 Align(
                   alignment: Alignment
