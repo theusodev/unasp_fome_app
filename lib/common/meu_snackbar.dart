@@ -1,10 +1,6 @@
-import "package:flutter/material.dart ";
-import "package:flutter/widgets.dart";
+import "package:flutter/material.dart";
 
-//SNACKBAR É UMA BARRINHA QUE APARECE NA TELA DE REGISTRO EM CASO DE ERRO DE REGISTRO
-//COMO USUÁRIO JÁ CADASTRADO POR EXEMPLO
-
-mostrarSnackBar(
+void mostrarSnackBar(
     {required BuildContext context,
     required String texto,
     bool isErro = true}) {

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart%20';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:unasp_fome_app/services/autenticacao_service.dart';
+import 'package:provider/provider.dart';
 import 'package:unasp_fome_app/view/cart_page.dart';
 import 'package:unasp_fome_app/view/initial_page.dart';
 import 'package:unasp_fome_app/view/profile_page.dart';
 import 'package:unasp_fome_app/view/search_page.dart';
+import 'package:unasp_fome_app/providers/user_provider.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -17,7 +16,6 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   int paginaAtual = 0;
   late PageController pc;
- 
 
   @override
   void initState() {
@@ -33,7 +31,7 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(     
+    return Scaffold(
       // view responsavel pela barra navegação inferior
       body: PageView(
         controller: pc,
@@ -41,7 +39,7 @@ class _HomepageState extends State<Homepage> {
           InitialPage(),
           SearchPage(),
           CartPage(),
-          Profilepage()
+          ProfilePage(), // Não é mais necessário passar userData aqui
         ],
         onPageChanged: setPaginaAtual,
       ),
@@ -62,26 +60,25 @@ class _HomepageState extends State<Homepage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.search, color: Colors.black),
             label: "Procurar",
-            activeIcon: Icon(Icons.search, color: Colors.orange)
+            activeIcon: Icon(Icons.search, color: Colors.orange),
           ),
           
           //botao carrinho
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart, color: Colors.black,),
+            icon: Icon(Icons.shopping_cart, color: Colors.black),
             label: "Carrinho",
-            activeIcon: Icon(Icons.shopping_cart, color: Colors.orange)
+            activeIcon: Icon(Icons.shopping_cart, color: Colors.orange),
           ),
           
           //botao perfil
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.account_circle, color: Colors.black),
             label: "Perfil",
-            activeIcon: Icon(Icons.account_circle, color: Colors.orange)
-            ),
+            activeIcon: Icon(Icons.account_circle, color: Colors.orange),
+          ),
         ],
-        onTap: (pagina){
+        onTap: (pagina) {
           pc.animateToPage(pagina, duration: Duration(milliseconds: 400), curve: Curves.ease);
-          
         },
       ),
     );

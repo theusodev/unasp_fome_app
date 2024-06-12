@@ -43,6 +43,8 @@ class ConfirmarPedidoPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 15),
+                    
+                    //CAMPO ENDEREÇO DE ENVIO
                     Text(
                       "Endereço de envio",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
