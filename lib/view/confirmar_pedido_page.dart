@@ -43,17 +43,15 @@ class ConfirmarPedidoPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 15),
-                    
-                    //CAMPO ENDEREÇO DE ENVIO
+
+                    // CAMPO ENDEREÇO DE ENVIO
                     Text(
                       "Endereço de envio",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      width: MediaQuery.of(context).size.width,
-                      height: 110,
+                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -65,48 +63,46 @@ class ConfirmarPedidoPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  nome,
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => EnderecoEnvioPage()),
-                                    );
-                                  },
-                                  child: Text(
-                                    "Editar",
-                                    style: TextStyle(
-                                        fontSize: 18, color: Colors.orange),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Text(
-                              endereco,
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            Text(
-                              cep,
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            if (complemento.isNotEmpty)
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               Text(
-                                complemento,
+                                nome,
                                 style: TextStyle(fontSize: 16),
                               ),
-                          ],
-                        ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => EnderecoEnvioPage(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  "Editar",
+                                  style: TextStyle(fontSize: 18, color: Colors.orange),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            endereco,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          Text(
+                            cep,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          if (complemento.isNotEmpty)
+                            Text(
+                              complemento,
+                              style: TextStyle(fontSize: 16),
+                            ),
+                        ],
                       ),
                     ),
                     SizedBox(height: 30),
@@ -115,15 +111,15 @@ class ConfirmarPedidoPage extends StatelessWidget {
                       children: [
                         Text(
                           "Forma de pagamento",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => CheckoutPage()),
+                                builder: (context) => CheckoutPage(),
+                              ),
                             );
                           },
                           child: Text(
@@ -140,8 +136,9 @@ class ConfirmarPedidoPage extends StatelessWidget {
                           height: 55,
                           width: 55,
                           decoration: BoxDecoration(
-                              color: Colors.orange[50],
-                              borderRadius: BorderRadius.circular(10)),
+                            color: Colors.orange[50],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           child: Icon(
                             paymentModel.selectedPaymentIcon,
                             color: Colors.orange,
@@ -158,8 +155,7 @@ class ConfirmarPedidoPage extends StatelessWidget {
                     Divider(height: 40),
                     Text(
                       "Resumo do Pedido",
-                      style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
                     ListView.builder(
@@ -182,13 +178,11 @@ class ConfirmarPedidoPage extends StatelessWidget {
                       children: [
                         Text(
                           "Total:",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           "R\$ ${cartModel.calcularTotal()}",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -202,8 +196,8 @@ class ConfirmarPedidoPage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      PedidoConfirmadoSucesso()),
+                                builder: (context) => PedidoConfirmadoSucesso(),
+                              ),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -215,8 +209,9 @@ class ConfirmarPedidoPage extends StatelessWidget {
                           child: Text(
                             "Confirmar pedido",
                             style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
