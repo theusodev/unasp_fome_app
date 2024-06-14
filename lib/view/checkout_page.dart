@@ -93,7 +93,29 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         Icons.qr_code,
                         4,
                       ),
-                      SizedBox(height: 100),
+                      SizedBox(height: 50),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Text(
+                              "O pagamento será efetuado no momento da entrega.",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
