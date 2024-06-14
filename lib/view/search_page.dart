@@ -129,32 +129,39 @@ class _SearchPageState extends State<SearchPage> {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: SizedBox(
-                  child: ListView.builder(
-                    itemCount: filtroItens.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ProdutoDetalhesPage(
-                                produtoNome: filtroItens[index][0],
-                                produtoPreco: filtroItens[index][1],
-                                produtoImagem: filtroItens[index][4],
-                                produtoDescricao: filtroItens[index][3],
-                                produtoItem: filtroItens[index],
+                  child: filtroItens.isEmpty
+                      ? Center(
+                          child: Text(
+                            "Item não encontrado",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: filtroItens.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProdutoDetalhesPage(
+                                      produtoNome: filtroItens[index][0],
+                                      produtoPreco: filtroItens[index][1],
+                                      produtoImagem: filtroItens[index][4],
+                                      produtoDescricao: filtroItens[index][3],
+                                      produtoItem: filtroItens[index],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: ListTile(
+                                title: Text(filtroItens[index][0]),
+                                subtitle: Text("Preço: R\$ ${filtroItens[index][1]}"),
+                                leading: Image.asset(filtroItens[index][2]),
                               ),
-                            ),
-                          );
-                        },
-                        child: ListTile(
-                          title: Text(filtroItens[index][0]),
-                          subtitle: Text("Preço: R\$ ${filtroItens[index][1]}"),
-                          leading: Image.asset(filtroItens[index][2]),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
                 ),
               ),
             const SizedBox(height: 16),

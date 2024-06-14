@@ -1,9 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/widgets.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
-//AQUI É O SERVIÇO DE AUTENTICAÇÃO PARA USAR O LOGIN DO FIREBASE
 class AutenticacaoService {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
@@ -28,7 +24,6 @@ class AutenticacaoService {
       if (e.code == "email-already-in-use") {
         return "O usuário já está cadastrado";
       }
-
       return "Erro desconhecido";
     }
   }
@@ -47,4 +42,6 @@ class AutenticacaoService {
   Future<void> deslogar() async {
     return _firebaseAuth.signOut();
   }
+
+  signInWithGoogle() {}
 }
