@@ -38,7 +38,8 @@ class RoteadorTela extends StatelessWidget {
       stream: FirebaseAuth.instance.userChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return const Homepage();
+          // qualquer coisa voltar o homepage aqui
+          return const SplashPage();
         } else {
           return const LoginPage();
         }
