@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserProvider with ChangeNotifier {
-  Map<String, String> _userData = {};
+  Map<String, dynamic> _userData = {};
 
-  Map<String, String> get userData => _userData;
+  Map<String, dynamic> get userData => _userData;
 
-  void setUserData(Map<String, String> newUserData) {
-    _userData = newUserData;
+  Future<void> loadUserData() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('usuarios').doc(user.uid).get();
+      _userData = userDoc.data() as Map<String, dynamic>;
+      notifyListeners();
+    }
+  }
+
+  void setUserData(Map<String, dynamic> userData) {
+    _userData = userData;
     notifyListeners();
   }
 }

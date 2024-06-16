@@ -233,29 +233,31 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () => {botaoEntrarClicado()},
                 ),
                 SizedBox(height: 2),
-                MaterialButton(
-                  onPressed: () {
-                    SignInWithGoogle();
-                  },
-                  height: 41.0,
-                  minWidth: 171.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100)),
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  textColor: const Color.fromARGB(255, 0, 0, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/images/Google_Login.png',
-                        width: 24,
-                        height: 24,
-                      ),
-                      SizedBox(width: 8),
-                      Text('Entrar com o Google')
-                    ],
-                  ),
-                ),
+                
+                // botão de login com o google
+                // MaterialButton(
+                //   onPressed: () {
+                //     SignInWithGoogle();
+                //   },
+                //   height: 41.0,
+                //   minWidth: 171.0,
+                //   shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(100)),
+                //   color: const Color.fromARGB(255, 255, 255, 255),
+                //   textColor: const Color.fromARGB(255, 0, 0, 0),
+                //   child: Row(
+                //     mainAxisSize: MainAxisSize.min,
+                //     children: <Widget>[
+                //       Image.asset(
+                //         'assets/images/Google_Login.png',
+                //         width: 24,
+                //         height: 24,
+                //       ),
+                //       SizedBox(width: 8),
+                //       Text('Entrar com o Google')
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -297,66 +299,68 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void registrarUsuario() async {
-    if (_formKey.currentState!.validate()) {
-      String nome = _nomeController.text;
-      String nascimento = _nascimentoController.text;
-      String cpf = _cpfController.text;
-      String email = _emailController.text;
-      String senha = _senhaController.text;
-      String telefone = _telefoneController.text;
-      String endereco = _enderecoController.text;
-      String complemento = _complementoController.text;
-      String cep = _cepController.text;
+  if (_formKey.currentState!.validate()) {
+    String nome = _nomeController.text;
+    String nascimento = _nascimentoController.text;
+    String cpf = _cpfController.text;
+    String email = _emailController.text;
+    String senha = _senhaController.text;
+    String telefone = _telefoneController.text;
+    String endereco = _enderecoController.text;
+    String complemento = _complementoController.text;
+    String cep = _cepController.text;
 
-      String? errorMessage = await _autentService.cadastrarUsuario(
-        nome: nome,
-        nascimento: nascimento,
-        cpf: cpf,
-        email: email,
-        senha: senha,
-        telefone: telefone,
-        endereco: endereco,
-        complemento: complemento,
-        cep: cep,
-      );
+    String? errorMessage = await _autentService.cadastrarUsuario(
+      nome: nome,
+      nascimento: nascimento,
+      cpf: cpf,
+      email: email,
+      senha: senha,
+      telefone: telefone,
+      endereco: endereco,
+      complemento: complemento,
+      cep: cep,
+    );
 
-      if (!mounted) return; // Verifica se o widget ainda está montado
-      if (errorMessage == null) {
-        Provider.of<UserProvider>(context, listen: false).setUserData({
-          'nome': nome,
-          'nascimento': nascimento,
-          'cpf': cpf,
-          'email': email,
-          'telefone': telefone,
-          'endereco': endereco,
-          'complemento': complemento,
-          'cep': cep,
-        });
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Homepage()));
-      } else {
-        mostrarSnackBar(context: context, texto: errorMessage);
-      }
+    if (!mounted) return; // Verifica se o widget ainda está montado
+    if (errorMessage == null) {
+      Provider.of<UserProvider>(context, listen: false).setUserData({
+        'nome': nome,
+        'nascimento': nascimento,
+        'cpf': cpf,
+        'email': email,
+        'telefone': telefone,
+        'endereco': endereco,
+        'complemento': complemento,
+        'cep': cep,
+      });
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Homepage()));
+    } else {
+      mostrarSnackBar(context: context, texto: errorMessage);
     }
   }
+}
 
-  Future<UserCredential?> SignInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      if (googleUser == null) {
-        // O usuário cancelou a autenticação
-        return null;
-      }
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      final OAuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      return await FirebaseAuth.instance.signInWithCredential(credential);
-    } catch (e) {
-      print('Erro ao fazer login com o Google: $e');
-      return null;
-    }
-  }
+
+  // funcionalidade login com o google
+  // Future<UserCredential?> SignInWithGoogle() async {
+  //   try {
+  //     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  //     if (googleUser == null) {
+  //       // O usuário cancelou a autenticação
+  //       return null;
+  //     }
+  //     final GoogleSignInAuthentication googleAuth =
+  //         await googleUser.authentication;
+  //     final OAuthCredential credential = GoogleAuthProvider.credential(
+  //       accessToken: googleAuth.accessToken,
+  //       idToken: googleAuth.idToken,
+  //     );
+  //     return await FirebaseAuth.instance.signInWithCredential(credential);
+  //   } catch (e) {
+  //     print('Erro ao fazer login com o Google: $e');
+  //     return null;
+  //   }
+  // }
 }

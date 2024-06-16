@@ -1,5 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CartModel extends ChangeNotifier {
   // Lista de produtos
@@ -15,9 +16,6 @@ class CartModel extends ChangeNotifier {
     ["Risoto", "35.00", "assets/images/risoto.jpeg", "Risoto cremoso de alho-poró e queijos finos.", "assets/images/risoto.jpeg", "Janta"],
     ["Pudim", "10.00", "assets/images/pudim.jpeg", "Pudim cremoso para adoçar a sua vida.", "assets/images/pudim.jpeg", "Sobremesas"],
     ["Tiramisu", "15.00", "assets/images/tiramisu.jpeg", "Um sofisticado doce italiano a base de café", "assets/images/tiramisu.jpeg", "Sobremesas"],
-
-
-
   ];
 
   // Lista de produtos no carrinho e suas quantidades
@@ -71,10 +69,48 @@ class CartModel extends ChangeNotifier {
   }
 
   // Confirmar pedido e adicionar ao histórico
-  void confirmarPedido() {
+  Future<void> confirmarPedido() async {
     if (_itensCart.isNotEmpty) {
       _historicoPedidos.add(Map.from(_itensCart));
+
+      // Salvar pedido no Firestore
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await FirebaseFirestore.instance
+            .collection('usuarios')
+            .doc(user.uid)
+            .collection('historicoPedidos')
+            .add({
+          'pedido': _itensCart.map((key, value) => MapEntry(key[0], value)),
+          'data': Timestamp.now(),
+        });
+      }
+
       _itensCart.clear();
+      notifyListeners();
+    }
+  }
+
+  // Carregar histórico de pedidos do Firestore
+  Future<void> carregarHistoricoPedidos() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection('usuarios')
+          .doc(user.uid)
+          .collection('historicoPedidos')
+          .orderBy('data', descending: true)
+          .get();
+
+      _historicoPedidos = snapshot.docs.map((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        Map<List<dynamic>, int> pedido = {};
+        data['pedido'].forEach((key, value) {
+          List<dynamic> item = produtosItens.firstWhere((element) => element[0] == key);
+          pedido[item] = value;
+        });
+        return pedido;
+      }).toList();
       notifyListeners();
     }
   }

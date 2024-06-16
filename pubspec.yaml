@@ -42,7 +42,11 @@ dependencies:
   firebase_auth: ^4.19.4
   google_sign_in: ^6.2.1
   provider:
+<<<<<<< HEAD
   mockito: ^5.4.4
+=======
+  cloud_firestore: ^4.17.5
+>>>>>>> ae91bd59d990e653d98b62aaa02eb32a9e735ee1
 
 dev_dependencies:
   flutter_test:
