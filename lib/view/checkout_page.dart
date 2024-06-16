@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unasp_fome_app/model/cart_model.dart';
 import 'package:unasp_fome_app/model/payment_model.dart';
+import 'package:unasp_fome_app/view/confirmar_pedido_page.dart';
 import 'package:unasp_fome_app/view/endereco_envio_page.dart';
 
 class CheckoutPage extends StatefulWidget {
@@ -145,7 +146,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EnderecoEnvioPage()),
+                                  builder: (context) => ConfirmarPedidoPage()),
                             );
                           },
                           style: ElevatedButton.styleFrom(

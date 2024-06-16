@@ -5,23 +5,10 @@ import 'package:unasp_fome_app/model/payment_model.dart';
 import 'package:unasp_fome_app/view/checkout_page.dart';
 import 'package:unasp_fome_app/view/endereco_envio_page.dart';
 import 'package:unasp_fome_app/view/pedido_confirmado_sucesso.dart';
+import 'package:unasp_fome_app/providers/user_provider.dart';
+import 'package:unasp_fome_app/view/profile_page.dart';
 
 class ConfirmarPedidoPage extends StatelessWidget {
-  final String nome;
-  final String telefone;
-  final String endereco;
-  final String cep;
-  final String complemento;
-
-  const ConfirmarPedidoPage({
-    Key? key,
-    required this.nome,
-    required this.telefone,
-    required this.endereco,
-    required this.cep,
-    required this.complemento,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +20,16 @@ class ConfirmarPedidoPage extends StatelessWidget {
           style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
         ),
       ),
-      body: Consumer2<CartModel, PaymentModel>(
-        builder: (context, cartModel, paymentModel, child) {
+      body: Consumer3<UserProvider, CartModel, PaymentModel>(
+        builder: (context, userProvider, cartModel, paymentModel, child) {
+          var userData = userProvider.userData;
+
+          String nome = userData['nome'] ?? '';
+          String telefone = userData['telefone'] ?? '';
+          String endereco = userData['endereco'] ?? '';
+          String cep = userData['cep'] ?? '';
+          String complemento = userData['complemento'] ?? '';
+
           return SingleChildScrollView(
             child: SafeArea(
               child: Padding(

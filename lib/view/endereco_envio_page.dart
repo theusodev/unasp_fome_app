@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:unasp_fome_app/providers/user_provider.dart';
 import 'package:unasp_fome_app/view/confirmar_pedido_page.dart';
 
 class EnderecoEnvioPage extends StatefulWidget {
@@ -15,14 +19,47 @@ class _EnderecoEnvioPageState extends State<EnderecoEnvioPage> {
   final _complementoController = TextEditingController();
 
   @override
-  // void dispose() {
-  //   _nomeController.dispose();
-  //   _telefoneController.dispose();
-  //   _enderecoController.dispose();
-  //   _cepController.dispose();
-  //   _complementoController.dispose();
-  //   super.dispose();
-  // }
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    await Provider.of<UserProvider>(context, listen: false).loadUserData();
+    final userData = Provider.of<UserProvider>(context, listen: false).userData;
+
+    _nomeController.text = userData['nome'] ?? '';
+    _telefoneController.text = userData['telefone'] ?? '';
+    _enderecoController.text = userData['endereco'] ?? '';
+    _cepController.text = userData['cep'] ?? '';
+    _complementoController.text = userData['complemento'] ?? '';
+  }
+
+  Future<void> _saveUserData() async {
+    if (_formKey.currentState!.validate()) {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await FirebaseFirestore.instance.collection('usuarios').doc(user.uid).update({
+          'nome': _nomeController.text,
+          'telefone': _telefoneController.text,
+          'endereco': _enderecoController.text,
+          'cep': _cepController.text,
+          'complemento': _complementoController.text,
+        });
+
+        Provider.of<UserProvider>(context, listen: false).setUserData({
+          'nome': _nomeController.text,
+          'telefone': _telefoneController.text,
+          'endereco': _enderecoController.text,
+          'cep': _cepController.text,
+          'complemento': _complementoController.text,
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Endereço atualizado com sucesso!')));
+        Navigator.pop(context);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +68,7 @@ class _EnderecoEnvioPageState extends State<EnderecoEnvioPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          "Envio",
+          "Editar Endereço de Envio",
           style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
         ),
       ),
@@ -42,7 +79,6 @@ class _EnderecoEnvioPageState extends State<EnderecoEnvioPage> {
             key: _formKey,
             child: Column(
               children: [
-                // Campo de nome
                 TextFormField(
                   controller: _nomeController,
                   validator: (value) {
@@ -67,7 +103,6 @@ class _EnderecoEnvioPageState extends State<EnderecoEnvioPage> {
                   ),
                 ),
                 SizedBox(height: 20),
-                // Campo de telefone
                 TextFormField(
                   controller: _telefoneController,
                   validator: (value) {
@@ -90,7 +125,6 @@ class _EnderecoEnvioPageState extends State<EnderecoEnvioPage> {
                   ),
                 ),
                 SizedBox(height: 20),
-                // Campo de endereço
                 TextFormField(
                   controller: _enderecoController,
                   validator: (value) {
@@ -109,7 +143,6 @@ class _EnderecoEnvioPageState extends State<EnderecoEnvioPage> {
                   ),
                 ),
                 SizedBox(height: 20),
-                // Campo de CEP
                 TextFormField(
                   controller: _cepController,
                   validator: (value) {
@@ -132,7 +165,6 @@ class _EnderecoEnvioPageState extends State<EnderecoEnvioPage> {
                   ),
                 ),
                 SizedBox(height: 20),
-                // Campo de complemento
                 TextFormField(
                   controller: _complementoController,
                   validator: (value) {
@@ -148,26 +180,10 @@ class _EnderecoEnvioPageState extends State<EnderecoEnvioPage> {
                   ),
                 ),
                 SizedBox(height: 30),
-                // Botão de adicionar endereço
                 SizedBox(
                   width: 300,
                   child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ConfirmarPedidoPage(
-                              nome: _nomeController.text,
-                              telefone: _telefoneController.text,
-                              endereco: _enderecoController.text,
-                              cep: _cepController.text,
-                              complemento: _complementoController.text,
-                            ),
-                          ),
-                        );
-                      }
-                    },
+                    onPressed: _saveUserData,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange,
                       shape: RoundedRectangleBorder(
@@ -175,7 +191,7 @@ class _EnderecoEnvioPageState extends State<EnderecoEnvioPage> {
                       ),
                     ),
                     child: Text(
-                      "Adicionar endereço",
+                      "Salvar Endereço",
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
