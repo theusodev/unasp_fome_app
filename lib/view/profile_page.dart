@@ -7,7 +7,6 @@ import 'package:unasp_fome_app/view/historico_pedidos_page.dart';
 import 'package:unasp_fome_app/view/login_page.dart';
 
 class ProfilePage extends StatelessWidget {
- 
   // Custom input decoration
   InputDecoration inputDecoration(String label) {
     return InputDecoration(
@@ -22,8 +21,6 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userData = Provider.of<UserProvider>(context).userData;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -43,14 +40,10 @@ class ProfilePage extends StatelessWidget {
                 try {
                   await AutenticacaoService().deslogar();
                   await GoogleSignIn().signOut();
-                  Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
-                  // Redirecionamento de tela de volta para o login
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => LoginPage()), // Redireciona para a página de login
-                  //   (Route<dynamic> route) => false,
-                  // );
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
                 } catch (e) {
                   print("Erro ao deslogar: $e");
                 }
@@ -71,60 +64,71 @@ class ProfilePage extends StatelessWidget {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            TextField(
-              decoration: inputDecoration('Nome'),
-              controller: TextEditingController(text: userData['nome']),
-              readOnly: true,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              decoration: inputDecoration('Data de Nascimento'),
-              controller: TextEditingController(text: userData['nascimento']),
-              readOnly: true,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              decoration: inputDecoration('CPF'),
-              controller: TextEditingController(text: userData['cpf']),
-              readOnly: true,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              decoration: inputDecoration('E-mail'),
-              controller: TextEditingController(text: userData['email']),
-              readOnly: true,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              decoration: inputDecoration('Telefone'),
-              controller: TextEditingController(text: userData['telefone']),
-              readOnly: true,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              decoration: inputDecoration('Endereço'),
-              controller: TextEditingController(text: userData['endereco']),
-              readOnly: true,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              decoration: inputDecoration('Complemento'),
-              controller: TextEditingController(text: userData['complemento']),
-              readOnly: true,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              decoration: inputDecoration('CEP'),
-              controller: TextEditingController(text: userData['cep']),
-              readOnly: true,
-            ),
-          ],
-        ),
+      body: FutureBuilder(
+        future: Provider.of<UserProvider>(context, listen: false).loadUserData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            final userData = Provider.of<UserProvider>(context).userData;
+
+            return Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  TextField(
+                    decoration: inputDecoration('Nome'),
+                    controller: TextEditingController(text: userData['nome']),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 10),
+                  TextField(
+                    decoration: inputDecoration('Data de Nascimento'),
+                    controller: TextEditingController(text: userData['nascimento']),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 10),
+                  TextField(
+                    decoration: inputDecoration('CPF'),
+                    controller: TextEditingController(text: userData['cpf']),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 10),
+                  TextField(
+                    decoration: inputDecoration('E-mail'),
+                    controller: TextEditingController(text: userData['email']),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 10),
+                  TextField(
+                    decoration: inputDecoration('Telefone'),
+                    controller: TextEditingController(text: userData['telefone']),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 10),
+                  TextField(
+                    decoration: inputDecoration('Endereço'),
+                    controller: TextEditingController(text: userData['endereco']),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 10),
+                  TextField(
+                    decoration: inputDecoration('Complemento'),
+                    controller: TextEditingController(text: userData['complemento']),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 10),
+                  TextField(
+                    decoration: inputDecoration('CEP'),
+                    controller: TextEditingController(text: userData['cep']),
+                    readOnly: true,
+                  ),
+                ],
+              ),
+            );
+          }
+        },
       ),
     );
   }

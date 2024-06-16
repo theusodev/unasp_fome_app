@@ -57,6 +57,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '695561249892',
     projectId: 'flutter-unaspfome-app',
     storageBucket: 'flutter-unaspfome-app.appspot.com',
+    androidClientId: '695561249892-0odfk84ug1vet4n9omapi9fro5dcdsrc.apps.googleusercontent.com',
+    iosClientId: '695561249892-rd1sko1ual8o9d1itsdn4umn0eur4n0q.apps.googleusercontent.com',
     iosBundleId: 'com.example.unaspFomeApp',
   );
 
@@ -66,6 +68,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '695561249892',
     projectId: 'flutter-unaspfome-app',
     storageBucket: 'flutter-unaspfome-app.appspot.com',
+    androidClientId: '695561249892-0odfk84ug1vet4n9omapi9fro5dcdsrc.apps.googleusercontent.com',
+    iosClientId: '695561249892-8q8v7eqf5a985qa8gl6rr0lej153eih6.apps.googleusercontent.com',
     iosBundleId: 'none',
   );
 
