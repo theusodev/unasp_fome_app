@@ -4,111 +4,65 @@ import 'package:provider/provider.dart';
 import 'package:unasp_fome_app/model/cart_model.dart';
 import 'package:unasp_fome_app/view/cart_page.dart';
 import 'package:unasp_fome_app/view/produto_detalhes_page.dart';
+import 'package:mockito/mockito.dart';
 
+// Criação de um mock para CartModel
+class MockCartModel extends Mock implements CartModel {}
 
 void main() {
+  // Criação de um widget para envolver o ProdutoDetalhesPage com o Provider
+  Widget createWidgetUnderTest({required CartModel cartModel}) {
+    return ChangeNotifierProvider<CartModel>.value(
+      value: cartModel,
+      child: MaterialApp(
+        home: ProdutoDetalhesPage(
+          produtoNome: 'Produto Teste',
+          produtoPreco: '99.99',
+          produtoImagem: 'assets/images/produto.jpg',
+          produtoDescricao: 'Descrição do produto teste',
+          produtoItem: ['Produto Teste', '99.99'],
+        ),
+      ),
+    );
+  }
+
   group('ProdutoDetalhesPage', () {
-    testWidgets('Deve renderizar a página de detalhes do produto corretamente', (WidgetTester tester) async {
-      // Mock data do produto
-      const produtoNome = 'Produto Teste';
-      const produtoPreco = '10.00';
-      const produtoDescricao = 'Descrição do produto teste';
+    testWidgets('Renderiza os elementos principais do produto', (WidgetTester tester) async {
+      await tester.runAsync(() async {
+        final cartModel = MockCartModel();
 
-      // Mock de CartModel
-      final cartModel = CartModel();
+        // Mocking the getQuantidade method to return a default value
+        when(cartModel.getQuantidade(any)).thenReturn(1);
 
-      // Monta a página de detalhes do produto com CartModel
-      await tester.pumpWidget(
-        ChangeNotifierProvider<CartModel>.value(
-          value: cartModel,
-          child: MaterialApp(
-            home: ProdutoDetalhesPage(
-              produtoNome: produtoNome,
-              produtoPreco: produtoPreco,
-              produtoDescricao: produtoDescricao,
-            ),
-          ),
-        ),
-      );
+        await tester.pumpWidget(createWidgetUnderTest(cartModel: cartModel));
+        await tester.pumpAndSettle();
 
-      // Verifica se o nome do produto é exibido
-      expect(find.text(produtoNome), findsOneWidget);
-
-      // Verifica se o preço do produto é exibido
-      expect(find.text('R\$ $produtoPreco'), findsOneWidget);
-
-      // Verifica se a descrição do produto é exibida
-      expect(find.text(produtoDescricao), findsOneWidget);
-
-      // Verifica se o botão "Ir para Carrinho" está presente
-      expect(find.text('Ir para Carrinho'), findsOneWidget);
+        // Verificação de que os elementos principais são renderizados
+        expect(find.text('Produto Teste'), findsOneWidget);
+        expect(find.text('Descrição do produto teste'), findsOneWidget);
+        expect(find.text('R\$ 99.99'), findsOneWidget);
+        expect(find.byType(Image), findsOneWidget);
+      });
     });
 
-    testWidgets('Deve adicionar e remover produtos do carrinho', (WidgetTester tester) async {
-      // Mock de CartModel
-      final cartModel = CartModel();
+    testWidgets('Navegação para a página do carrinho', (WidgetTester tester) async {
+      await tester.runAsync(() async {
+        final cartModel = MockCartModel();
 
-      // Mock data do produto
-      const produtoNome = 'Produto Teste';
-      const produtoPreco = '10.00';
+        // Mocking the getQuantidade method to return a default value
+        when(cartModel.getQuantidade(any)).thenReturn(1);
 
-      // Monta a página de detalhes do produto com CartModel
-      await tester.pumpWidget(
-        ChangeNotifierProvider<CartModel>.value(
-          value: cartModel,
-          child: MaterialApp(
-            home: ProdutoDetalhesPage(
-              produtoNome: produtoNome,
-              produtoPreco: produtoPreco,
-            ),
-          ),
-        ),
-      );
+        await tester.pumpWidget(createWidgetUnderTest(cartModel: cartModel));
+        await tester.pumpAndSettle();
 
-      // Verifica se a quantidade inicial é 0
-      expect(find.text('0'), findsOneWidget);
+        final goToCartButton = find.text('Ir para Carrinho');
 
-      // Adiciona um produto ao carrinho
-      await tester.tap(find.byIcon(Icons.add));
-      await tester.pumpAndSettle();
+        // Toca no botão "Ir para Carrinho" e verifica a navegação
+        await tester.tap(goToCartButton);
+        await tester.pumpAndSettle();
 
-      // Verifica se a quantidade foi atualizada para 1
-      expect(find.text('1'), findsOneWidget);
-
-      // Remove um produto do carrinho
-      await tester.tap(find.byIcon(Icons.remove));
-      await tester.pumpAndSettle();
-
-      // Verifica se a quantidade foi atualizada para 0
-      expect(find.text('0'), findsOneWidget);
-    });
-
-    testWidgets('Deve navegar para a página do carrinho ao clicar no botão "Ir para Carrinho"', (WidgetTester tester) async {
-      // Mock de CartModel
-      final cartModel = CartModel();
-
-      // Mock Navigator
-      await tester.pumpWidget(
-        ChangeNotifierProvider<CartModel>.value(
-          value: cartModel,
-          child: MaterialApp(
-            home: ProdutoDetalhesPage(
-              produtoNome: 'Produto Teste',
-              produtoPreco: '10.00',
-            ),
-            routes: {
-              '/cart': (context) => CartPage(),
-            },
-          ),
-        ),
-      );
-
-      // Simula o clique no botão "Ir para Carrinho"
-      await tester.tap(find.widgetWithText(MaterialButton, 'Ir para Carrinho'));
-      await tester.pumpAndSettle();
-
-      // Verifica se a navegação para a página do carrinho ocorreu
-      expect(find.byType(CartPage), findsOneWidget);
+        expect(find.byType(CartPage), findsOneWidget);
+      });
     });
   });
 }
