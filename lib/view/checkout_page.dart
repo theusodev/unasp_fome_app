@@ -97,7 +97,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Container(
+                          Flexible(child: Container(
                             padding: EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
                               color: Colors.orange,
@@ -110,7 +110,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 color: Colors.white,
                               ),
                             ),
-                          ),
+                          ),)
+                          
                         ],
                       ),
                       SizedBox(
