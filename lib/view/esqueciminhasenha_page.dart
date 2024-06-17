@@ -96,7 +96,7 @@ class EsqueciminhasenhaPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () => _resetPassword(context),
               child: Text(
-                "Reenviar senha",
+                "Restaurar senha",
                 style: TextStyle(color: Colors.white),
               ),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
