@@ -168,7 +168,7 @@ class ConfirmarPedidoPage extends StatelessWidget {
                           leading: Image.asset(item[2]),
                           title: Text(item[0]),
                           subtitle: Text('Qtd: $quantidade'),
-                          trailing: Text('R\$ ${double.parse(item[1]).toStringAsFixed(2) * quantidade!}'),
+                          trailing: Text('R\$ ${double.parse(item[1]) * quantidade!}'),
                         );
                       },
                     ),

@@ -11,7 +11,7 @@ class CartModel extends ChangeNotifier {
     ["Suco Natural de Laranja", "4.00", "assets/images/suconatural.png", "Suco de laranja natural, 100% puro, espremido na hora.", "assets/images/sucodetalhes.png", "Bebidas"],
     ["Suco Natural de Manga", "4.00", "assets/images/sucodemanga.jpg", "Suco de manga natural, 100% puro, feito com mangas frescas.", "assets/images/sucodemanga.jpg", "Bebidas"],
     ["Espaguete a Bolonhesa", "30.00", "assets/images/espaguete.png", "Espaguete a Bolonhesa, macarrão com carne é bom", "assets/images/espaguete.png", "Almoço"],
-    ["Strogonoff Vegetariano", "25.00", "assets/images/strogonoff.png", "Strogonoff de frango de verdade é bem melhor", "assets/images/strogonoff.png", "Almoço"],
+    ["Strogonoff Vegetariano", "25.00", "assets/images/strogonoff.png", "O nosso Strogonoff Vegetariano é uma combinação irresistível de cogumelos suculentos, legumes frescos e um molho cremoso que vai encantar seu paladar!", "assets/images/strogonoff.png", "Almoço"],
     ["Nhoque", "30.00", "assets/images/nhoque.jpeg", "Um incrível nhoque ao suculento molho pomodoro. Massa fresca.", "assets/images/nhoque.jpeg", "Janta"],
     ["Risoto", "35.00", "assets/images/risoto.jpeg", "Risoto cremoso de alho-poró e queijos finos.", "assets/images/risoto.jpeg", "Janta"],
     ["Pudim", "10.00", "assets/images/pudim.jpeg", "Pudim cremoso para adoçar a sua vida.", "assets/images/pudim.jpeg", "Sobremesas"],

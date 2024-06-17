@@ -204,7 +204,12 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: Text((queroEntrar)
                           ? "Não tem uma conta ainda? Cadastre-se já!"
-                          : "Já tem uma conta? Entre já!")),
+                          : "Já tem uma conta? Entre já!",
+                          style: TextStyle(
+                            color: Colors.orange,
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.orange
+                          ),)),
                 ),
 
                 //SizedBox(height: 2.0),
@@ -220,7 +225,12 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                         }, 
-                        child: Text("Esqueci minha senha"))),
+                        child: Text("Esqueci minha senha",
+                        style: TextStyle(
+                          color: Colors.orange,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Colors.orange
+                        ),))),
 
                 MaterialButton(
                   height: 41.0,
