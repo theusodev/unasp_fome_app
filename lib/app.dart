@@ -39,7 +39,7 @@ class RoteadorTela extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           // qualquer coisa voltar o homepage aqui
-          return const SplashPage();
+          return const Homepage();
         } else {
           return const LoginPage();
         }

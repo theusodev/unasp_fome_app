@@ -106,7 +106,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onTap: () async {
                 try {
                   await AutenticacaoService().deslogar();
-                  await GoogleSignIn().signOut();
+                  //await GoogleSignIn().signOut();
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => LoginPage()),

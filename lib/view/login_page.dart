@@ -297,10 +297,8 @@ class _LoginPageState extends State<LoginPage> {
         if (erro != null) {
           mostrarSnackBar(context: context, texto: erro);
         } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Homepage()),
-          );
+          Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Homepage()));
         }
       });
     } else {
@@ -354,23 +352,23 @@ class _LoginPageState extends State<LoginPage> {
 
 
   // funcionalidade login com o google
-  // Future<UserCredential?> SignInWithGoogle() async {
-  //   try {
-  //     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-  //     if (googleUser == null) {
-  //       // O usuário cancelou a autenticação
-  //       return null;
-  //     }
-  //     final GoogleSignInAuthentication googleAuth =
-  //         await googleUser.authentication;
-  //     final OAuthCredential credential = GoogleAuthProvider.credential(
-  //       accessToken: googleAuth.accessToken,
-  //       idToken: googleAuth.idToken,
-  //     );
-  //     return await FirebaseAuth.instance.signInWithCredential(credential);
-  //   } catch (e) {
-  //     print('Erro ao fazer login com o Google: $e');
-  //     return null;
-  //   }
-  // }
+  Future<UserCredential?> SignInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) {
+        // O usuário cancelou a autenticação
+        return null;
+      }
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } catch (e) {
+      print('Erro ao fazer login com o Google: $e');
+      return null;
+    }
+  }
 }
