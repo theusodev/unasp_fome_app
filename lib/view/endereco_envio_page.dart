@@ -68,8 +68,8 @@ class _EnderecoEnvioPageState extends State<EnderecoEnvioPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          "Editar Endereço de Envio",
-          style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+          "Editar endereço de envio",
+          style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(
@@ -84,9 +84,6 @@ class _EnderecoEnvioPageState extends State<EnderecoEnvioPage> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Insira o nome';
-                    }
-                    if (!RegExp(r'^[a-zA-ZÀ-ÿ\s]+$').hasMatch(value)) {
-                      return 'Insira um nome válido';
                     }
                     if (value.length < 3) {
                       return 'Insira no mínimo 3 caracteres';

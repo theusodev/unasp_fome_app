@@ -222,9 +222,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: _saveUserData,
-                      child: Text('Salvar alterações'),
+                      child: Text('Salvar alterações',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold
+                      ),),
                       style: ElevatedButton.styleFrom(
-                        // color: Colors.orange,
+                        backgroundColor: Colors.orange,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100),
                         ),

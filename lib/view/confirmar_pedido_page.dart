@@ -62,12 +62,9 @@ class ConfirmarPedidoPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Text(
-                                nome,
-                                style: TextStyle(fontSize: 16),
-                              ),
+                              
                               TextButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -84,6 +81,14 @@ class ConfirmarPedidoPage extends StatelessWidget {
                               ),
                             ],
                           ),
+                          Text(
+                                nome,
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              Text(
+                                telefone,
+                                style: TextStyle(fontSize: 16),
+                              ),
                           Text(
                             endereco,
                             style: TextStyle(fontSize: 16),
